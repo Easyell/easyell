@@ -15,7 +15,6 @@ class SqlOp{
 		$this->adress = "127.0.0.1".$this->port;
 		$this->account = "root";
 		$this->password = 123456;
-		$this->connectTo();
 	}
 	public function setProperty($_ad,$_ac,$_ps,$_dbName){
 		$this->adress = $_ad.$this->port;
@@ -38,7 +37,7 @@ class SqlOp{
 			return FALSE;
 		}
 	}
-	public function queryTo($_str){
+	private function queryTo($_str){
 		$this->result = mysql_query($_str,$this->connect);
 		if($this->result!=FALSE){
 			return TRUE;
@@ -57,15 +56,17 @@ class SqlOp{
 	}
 	
 	public function getInserSqlString($tableName,$values) {
-			$sqlStringPrefix = "insert into" + $tableName + "values";
+			$sqlStringPrefix = "insert into ".$tableName." values";
+			echo $sqlStringPrefix;
 		$valueString = "";
-		for ($i = 0; i < count($values); i ++ ) {
-			$valueString += ("'" + $values[$i] + "'");  
+		for ($i = 0; $i < count($values); $i++ ) {
+			$valueString = $valueString.("'".$values[$i]."'");  
 			if ($i != count($values) - 1) {
-				$valueString += ",";
+				$valueString = $valueString.",";
 			}
 		}
-		return $sqlStringPrefix + "(" + $valueString + ")";
+		echo $valueString;
+		return $sqlStringPrefix."(".$valueString.")";
 	}
 	
 	public function deleteItem($tableName,$key,$value) {
@@ -73,7 +74,7 @@ class SqlOp{
 	}
 
 	public function getDeleteSqlString($tableName,$key,$value) {
-		return "delete from " +  $tableName + " where " + $key + " = " + $value;
+		return "delete from ".$tableName." where ".$key."='".$value."'";
 	}
 	
 	public function updateItem($tableName,$setKeys,$setValues,$searchKey,$searchValue) {
@@ -81,21 +82,26 @@ class SqlOp{
 	}
 	
 	public function getUpdateSqlString($tableName,$setKeys,$setValues,$searchKey,$searchValue) {
-		$sqlPrefix = "update " + $tableName + " set ";
+		$sqlPrefix = "update ".$tableName." set ";
 		$sqlBodyString = "";
-		for ($i = 0; $i < count($setKeys),$i++) {
-			$sqlBodyString += ($setKey[$i] + " ='" + $setValues +"'");
+		for ($i = 0; $i < count($setKeys);$i++) {
+			$appendString = $setKeys[$i]."='".$setValues[$i]."'";
+			$sqlBodyString = $sqlBodyString.$appendString;
+			if($i != count($setKeys) - 1) {
+				$sqlBodyString = $sqlBodyString.",";
+			}
 		}
-		$sqlSuffix = " where " + $searchKey + "='" + $searchValue + "'";
-		return $sqlPrefix + $sqlBodyString + $sqlSuffix;
+		$sqlSuffix = " where ".$searchKey."='".$searchValue."'";
+		return $sqlPrefix.$sqlBodyString.$sqlSuffix;
 	}
 
 	public function selectItem($tableName, $searchKey, $searchValue){
-		return $this->queryTo($this->getSelectSqlString($tableName, $searchKey, $searchValue))
+		return $this->queryTo($this->getSelectSqlString($tableName, $searchKey, $searchValue));
 	}
 	
 	public function getSelectSqlString($tableName, $searchKey, $searchValue) {
-		return "select * from " + $tableName +" where "+$searchKey "='" + $searchValue +"'";
+		return "select * from ".$tableName." where ".$searchKey."='".$searchValue."'";
 	}
 }
+
 ?>
