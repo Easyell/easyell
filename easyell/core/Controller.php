@@ -12,11 +12,6 @@ class Controller{
 	private $loaded_model_cache = array();
 	
 	public function __construct(){
-		
-		
-	}
-	public static function &get_instance(){
-
 	}
 	/*
 	 * 加载model的方法
