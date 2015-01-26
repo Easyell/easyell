@@ -1,39 +1,35 @@
 <?php
 
-require_once 'Model.php';
 class User extends Model{
-	$this->load('tools/m.php');
-	$sqlop;
 	public function __construct() {
-		$sqlop = new SqlOp();
+		$this->load('tools/SqlOp.php');
 	}
-	
 	public function selectUserWithSearchKeyAndValue($key, $value) {
-		$sqlop->connectTo();
-		$result = $sqlop->selectItem("User",$key,$value);
-		$sqlop->close();
+		$this->sqlop->connectTo();
+		$result = $this->sqlopop->selectItem("User",$key,$value);
+		$this->sqlopop->close();
 		return $result;
 	}
 	
 	public function insertUser($id,$account,$username,$password,$avatar,$email,$phone) {
-		$valueArray = [$id, $account, $username, $password, $avatar, $email, $phone];
-		$sqlop->connectTo();
-		$result = $sqlop->insertTo("User", $valueArray);
-		$sqlop->close();
+		$valueArray = array($id, $account, $username, $password, $avatar, $email, $phone);
+		$this->sqlopop->connectTo();
+		$result = $this->sqlopop->insertTo("User", $valueArray);
+		$this->sqlopop->close();
 		return $result;
 	}
 
 	public function deleteUserWithKeyAndValue($key, $value) {
-		$sqlop->connectTo();
-		$result = $sqlop->deleteItem("User",$key, $value);
-		$sqlop->close();
+		$this->sqlopop->connectTo();
+		$result = $this->sqlopop->deleteItem("User",$key, $value);
+		$this->sqlopop->close();
 		return $result;
 	}
 	
-	public functions updateUser($setKeys, $setValues, $searchKey, $searchValue) {
-		$sqlop->connectTo();
-		$result = $sqlop->updateUser("User", $setKeys, $setValues, $searchKey, $searchValue);
-		$sqlop-close();
+	public function updateUser($setKeys, $setValues, $searchKey, $searchValue) {
+		$this->sqlopop->connectTo();
+		$result = $this->sqlopop->updateUser("User", $setKeys, $setValues, $searchKey, $searchValue);
+		$this->sqlopop-close();
 		return $result;
 	}	
 }

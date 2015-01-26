@@ -1,5 +1,5 @@
 <?php
-class SqlOp{
+class SqlOp extends Model{
 	private $adress;
 	private $port = ":3306";
 	private $account;

@@ -1,5 +1,5 @@
 <?php
-
+//这是一个示例文件，没点屁用
 class A extends Controller{
 
 	private $name = 'A';
