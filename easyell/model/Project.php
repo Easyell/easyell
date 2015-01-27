@@ -8,6 +8,8 @@ class Project extends Model {
 	
 //Public Method
 	
+//Select
+
 	public function selectProjectWithid($id) {
 		return $this->selectProjectWithSearchKeyAndValue("id", $id);	
 	}
@@ -24,15 +26,44 @@ class Project extends Model {
 		return $this->selectProjectWithSearchKeyAndValue("adminid", $adminId);
 	}
 
-	public function selectProjectWithCreateId($createId) {
-		return $this->selectProjectWithSearchKeyAndValue("createid", $createId);
+	public function selectProjectWithCreateId($createrId) {
+		return $this->selectProjectWithSearchKeyAndValue("createrid", $createrId);
 	}
+
+//Delete
+
+	public function deleteProjectWithProjectId($id) {
+		return $this->deleteProject("id",$id);
+	}
+
+	public function deleteProjectWithProjectName($projectname) {
+		return $this->deleteProject("projectname", $projectname);
+	}
+	
+	public function deleteProjectWithGroupId($groupId) {
+		return $this->deleteProject("groupid", $groupId);
+	}
+
+	public function deleteProjectWithAdminId($adminId) {
+		return $this->deleteProject("adminid", $adminId);
+	}
+	
+	public function deleteProjectWithCreateId($createrId) {
+		return $this->deleteProject("createrid", $createrId);
+	}
+
+//Insert
 
 	public function insertProject($id, $projectname, $groupid, $adminid, $createrid, $description, $createdate) {
 		return $this->sqlop->insertTo("Project",$id, $projectname, $groupid, $adminid, $createrid, $description, $createdate);
 	}
-	
-	
+
+//Update
+
+	public function updateProject($setKeys, $setValues, $searchKey, $searchValue) {
+		return $this->sqlop->updateItem("Project",$setKeys, $setValues, $searchKey, $searchValue);
+	}
+
 //Private Method
 
 	private function selectProjectWithSearchKeyAndValue($key, $value) {
@@ -41,5 +72,10 @@ class Project extends Model {
 		$this->sqlop->close();
 		return $result;
 	}
+	
+	private function deleteProject($key, $value) {
+		return $this->sqlop->deleteItem("Project", $key, $value);	
+	}
+
 }	
 ?>
