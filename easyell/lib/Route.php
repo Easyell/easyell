@@ -38,10 +38,10 @@ class Route extends Model {
 		if (!method_exists($route_controller_obj, $this->set_param_fn)) {
 			return FALSE;
 		}
-		$route_controller_obj->set_param($param);
-
-		var_dump($route_controller_obj);
+		
+		$result = $route_controller_obj->set_param($param);
+		
+		$this->load('io/ouput.php');
 	}
-
 }
 ?>
