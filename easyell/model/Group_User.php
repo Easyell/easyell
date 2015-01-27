@@ -43,7 +43,7 @@ class Group_User {
 	
 //Insert
 	public function inserGroup_User($id, $groupid, $userid, $projectid) {
-		$valueArray = [$id, $groupid, $userid, $projectid];
+		$valueArray = array($id, $groupid, $userid, $projectid);
 		$this->sqlop->connectTo();
 		$result = $this->sqlop->insertTo("Project", $valueArray);
 		$this->sqlop->close();
@@ -65,7 +65,7 @@ class Group_User {
 		$this->sqlop->connectTo();
 		$result = $this->sqlop->selectItem("Project", $key, $value);
 		$this->close();
-		return = $result;
+		return $result;
 	}
 
 	private function deleteGroup_UserWithKeyAndValue($key, $value) {

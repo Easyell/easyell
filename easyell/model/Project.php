@@ -56,7 +56,7 @@ class Project extends Model {
 //Insert
 
 	public function insertProject($id, $projectname, $groupid, $adminid, $createrid, $description, $createdate) {
-		$valueArray = [$id, $projectname, $groupid, $adminid, $createrid, $description, $createdate]
+		$valueArray = array($id, $projectname, $groupid, $adminid, $createrid, $description, $createdate);
 		$this->sqlop->connectTo();
 		$result = $this->sqlop->insertTo("Project", $valueArray);
 		$this->sqlop->close();

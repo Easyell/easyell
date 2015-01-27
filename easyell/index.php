@@ -1,5 +1,5 @@
 <?php
-define('BASEPATH', 'base_path');
+define('BASEPATH', 'easyell');
 
 
 $host = $_SERVER['HTTP_HOST'];
@@ -35,7 +35,4 @@ if( !(!$route && $fn )){
 }
 
 $route_controller_obj = require_once $core_path.$route_path;
-
-
-var_dump($route_controller_obj);
 ?>

@@ -1,4 +1,4 @@
-<?php
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /*
  * 在 index.php 中
  */
@@ -32,6 +32,7 @@ function get_filename($path){
 	return $name;
 }
 $controller_parent = 'Controller';
+//自定义控制器的入口
 $set_param_fn = 'set_param';
 
 $class_name = get_filename($controller);
@@ -47,12 +48,9 @@ if (! method_exists($route_controller_obj, $set_param_fn)){
 	exit('controller '.$class_name.' is not intact');	
 }
 
-//header("Cache-Control: no-cache");
-//header("Pragma: no-cache");
-//header('Content-type: application/json');
-$route_controller_obj->set_param($param);
+$handle_result = $route_controller_obj->set_param($param);
 
-	
-return $route_controller_obj;
+
+return $handle_result;
 
 ?>
