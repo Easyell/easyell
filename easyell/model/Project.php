@@ -4,6 +4,7 @@ class Project extends Model {
 	
 	public function __construct() {
 		$this->load('tools/SqlOp.php');
+		$this->load('Group_User.php');
 	}
 	
 //Public Method
@@ -33,7 +34,7 @@ class Project extends Model {
 //Delete
 
 	public function deleteProjectWithProjectId($id) {
-		return $this->deleteProject("id",$id);
+		return ($this->deleteProject("id",$id) && $this->group_user->deleteGroup_UserWithId($id));
 	}
 
 	public function deleteProjectWithProjectName($projectname) {
