@@ -13,19 +13,32 @@ class Controller{
 	
 	public function __construct(){
 	}
+	public function get_filename($path){
+		$extension_len = 4;
+		$path_len = strlen($path);
+
+		$last_slash_pos = strrpos($path, '/');
+		$name = substr($path, $last_slash_pos + 1, $path_len - $last_slash_pos - $extension_len - 1);
+
+		return $name;
+	}
 	/*
 	 * 加载model的方法
 	 * $model_path model所在的相对于根目录路径；
 	 */
-	public function load($model_path,$other_handle){
+	public function load($model_path,$other_handle = NULL){
 		$model_path = $this->model_dir.$model_path;
 
 		if(!file_exists($model_path)){
 			exit('model does not exist');
 		}
-		$model_name = get_filename($model_path);
-
-		if($this->loaded_model_cache[$model_name]){
+		echo "$model_path";
+		$model_name = $this->get_filename($model_path);
+		if($model_name){
+			if( $this->loaded_model_cache[$model_name]){
+				return;
+			}
+		}else{
 			return;
 		}
 		require_once $model_path;

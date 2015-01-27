@@ -8,6 +8,7 @@ $url = $_SERVER['PHP_SELF'];
 $url_len = strlen($url);
 
 $core_path = 'core/';
+$lib_path = 'lib/';
 
 $controller_path = 'Controller.php';
 $model_path = 'Model.php';
@@ -29,10 +30,18 @@ $fn = intval($fn);
 
 $param = $_GET['param'];
 
+$callback = $_GET['callback'];
 
 if( !(!$route && $fn )){
 	exit('excess request url or didn\'t set fn or fn is illegal');
 }
 
-$route_controller_obj = require_once $core_path.$route_path;
+require_once $core_path.$controller_path;
+require_once $core_path.$model_path;
+require_once $lib_path.$route_path;
+require_once 'config/fn_map.php';
+
+
+$route = new Route();
+$r = $route->init($fn_map);
 ?>
