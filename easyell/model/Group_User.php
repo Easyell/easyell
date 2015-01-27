@@ -1,5 +1,5 @@
 <?php
-class Group_User {	
+class Group_User extends model{	
 	public function __construct() {
 		$this->load('tools/SqlOp.php');
 	}
