@@ -55,13 +55,19 @@ class Project extends Model {
 //Insert
 
 	public function insertProject($id, $projectname, $groupid, $adminid, $createrid, $description, $createdate) {
-		return $this->sqlop->insertTo("Project",$id, $projectname, $groupid, $adminid, $createrid, $description, $createdate);
+		$this->sqlop->connectTo();
+		$result = $this->sqlop->insertTo("Project",$id, $projectname, $groupid, $adminid, $createrid, $description, $createdate);
+		$this->sqlop->close();
+		return $result;
 	}
 
 //Update
 
 	public function updateProject($setKeys, $setValues, $searchKey, $searchValue) {
-		return $this->sqlop->updateItem("Project",$setKeys, $setValues, $searchKey, $searchValue);
+		$this->sqlop->connectTo();
+		$result =$this->sqlop->updateItem("Project",$setKeys, $setValues, $searchKey, $searchValue);
+		$this->sqlop->close();
+		return $result;
 	}
 
 //Private Method
@@ -74,7 +80,10 @@ class Project extends Model {
 	}
 	
 	private function deleteProject($key, $value) {
-		return $this->sqlop->deleteItem("Project", $key, $value);	
+		$this->sqlop->connectTo();
+		$result = $this->sqlop->deleteItem("Project", $key, $value);	
+		$this->sqlop->close();
+		return $result;
 	}
 
 }	
