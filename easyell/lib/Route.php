@@ -16,6 +16,10 @@ class Route extends Model {
 		$this->param = $_GET['param'];
 		//jsonp的回调函数名
 		$this->callback = $_GET['callback'];
+		
+		if($this->fn && $this->param){
+			exit('must have fn and param');
+		}
 	}
 	public function init($fn_map) {
 		$this->load('tools/Tools.php');
