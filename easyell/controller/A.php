@@ -9,7 +9,6 @@ class A extends Controller{
 	}
 
 	public function set_param(){
-	    //$this->load('tools/m.php','other_name');
 ///////Test for SqlOp.php///////////////////////////////
 	//--load;
 		//$this->load('tools/SqlOp.php');
@@ -36,9 +35,9 @@ class A extends Controller{
 	//--select
 		//echo json_encode($this->SqlOp->selectItem("User",'id', 7));
 ///////////////////////////////////////////////////////
-		//$this->other_name->get_name();
-		$this->load('User.php');
-		$result = $this->User->selectUserWithId(1);
+		$this->load('Group_User.php');
+		Group_User::out();
+	 	$result = $this->Group_User->selectGroup_UserWithGroupId(1);
 		echo json_encode($result);
 	}
 }

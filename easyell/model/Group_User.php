@@ -5,22 +5,24 @@ class Group_User extends model{
 	}
 	
 //PublicMethod
-
+ 	public static function out() {
+		echo 1;
+	}
 //Select
 	public function selectGroup_UserWithId($id) {
-		$this->selectGroup_UserWithKeyAndValue("id", $id);
+		return $this->selectGroup_UserWithKeyAndValue("id", $id);
 	}
 	
 	public function selectGroup_UserWithUserId($id) {
-		$this->selectGroup_UserWithKeyAndValue("userid", $id);
+		return $this->selectGroup_UserWithKeyAndValue("userid", $id);
 	}
 
 	public function selectGroup_UserWithProjectId($id) {
-		$this->selectGroup_UserWithKeyAndValue("projectid", $id);
+		return $this->selectGroup_UserWithKeyAndValue("projectid", $id);
 	}
 	
 	public function selectGroup_UserWithGroupId($id) {
-		$this->selectGroup_UserWithKeyAndValue("groupid", $id);
+		return $this->selectGroup_UserWithKeyAndValue("groupid", $id);
 	}	
 
 //Delete
@@ -44,33 +46,33 @@ class Group_User extends model{
 //Insert
 	public function inserGroup_User($id, $groupid, $userid, $projectid) {
 		$valueArray = array($id, $groupid, $userid, $projectid);
-		$this->sqlop->connectTo();
-		$result = $this->sqlop->insertTo("Project", $valueArray);
-		$this->sqlop->close();
+		$this->SqlOp->connectTo();
+		$result = $this->SqlOp->insertTo("Project", $valueArray);
+		$this->SqlOp->close();
 		return $result;
 	}
 
 //Update
 
 	public function updateGroup_User($setKeys,$setValues,$searchKey,$searchValue) {
-		$this->sqlop->connectTo();
-		$result = $this->sqlop->updateItem("Project", $setKeys,$setValues,$searchKey,$searchValue);
-		$this->sqlop->close();
+		$this->SqlOp->connectTo();
+		$result = $this->SqlOp->updateItem("Project", $setKeys,$setValues,$searchKey,$searchValue);
+		$this->SqlOp->close();
 		return $result;
 	}
 
 //PrivateMethod
 
 	private function selectGroup_UserWithKeyAndValue($key, $value) {
-		$this->sqlop->connectTo();
-		$result = $this->sqlop->selectItem("Project", $key, $value);
-		$this->close();
+		$this->SqlOp->connectTo();
+		$result = $this->SqlOp->selectItem("Project", $key, $value);
+		$this->SqlOp->close();
 		return $result;
 	}
 
 	private function deleteGroup_UserWithKeyAndValue($key, $value) {
-		$this->sqlop->connectTo();
-		$result = $this->sqlop->deleteItem("Project", $key, $value);
+		$this->SqlOp->connectTo();
+		$result = $this->SqlOp->deleteItem("Project", $key, $value);
 		$this->close();
 		return $result;
 	}
