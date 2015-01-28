@@ -14,6 +14,7 @@ class Controller{
 	public function __construct(){
 	}
 	public function get_filename($path){
+		echo "[path:".$path."]";
 		$extension_len = 4;
 		$path_len = strlen($path);
 
@@ -30,10 +31,11 @@ class Controller{
 		$model_path = $this->model_dir.$model_path;
 
 		if(!file_exists($model_path)){
-			exit('model does not exist');
+			exit('controller load model ['.$model_path.']  does not exist');
 		}
-		echo "$model_path";
+		echo "[model_path:".$model_path."]";
 		$model_name = $this->get_filename($model_path);
+		echo "[model_name:".$model_name."]";
 		if($model_name){
 			if( $this->loaded_model_cache[$model_name]){
 				return;
@@ -43,7 +45,6 @@ class Controller{
 		}
 		require_once $model_path;
 		$model_instance = new $model_name();
-		
 		//验证 model的继承
 		if(!$model_instance instanceof Model){
 			exit('load '.$model_path.' no exntend');
@@ -51,7 +52,7 @@ class Controller{
 		if($other_handle){
 			$this->$other_handle = $model_instance;
 		}else{
-			$this->$model_name = $model_instance;
+				$this->$model_name = $model_instance;
 		}
 		$this->loaded_model_cache[$model_name] = $model_instance;
 	}

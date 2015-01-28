@@ -6,7 +6,7 @@ class SqlOp extends Model{
 	private $password;
 	
 	private $db;
-	private $db_name = 'xingcrossword';
+	private $db_name = 'LightTracker';
 
 	public $connect;
 	public $result;
@@ -52,12 +52,11 @@ class SqlOp extends Model{
 		$this->result = null;
 	}
 	public function insertTo($tableName,$values) {
-		return $this->queryTo($this->getInserSqlString($tableName),$values);
+		return $this->queryTo($this->getInsertSqlString($tableName,$values));
 	}
 	
-	public function getInserSqlString($tableName,$values) {
-			$sqlStringPrefix = "insert into ".$tableName." values";
-			echo $sqlStringPrefix;
+	public function getInsertSqlString($tableName,$values) {
+		$sqlStringPrefix = "insert into ".$tableName." values";
 		$valueString = "";
 		for ($i = 0; $i < count($values); $i++ ) {
 			$valueString = $valueString.("'".$values[$i]."'");  
@@ -65,7 +64,6 @@ class SqlOp extends Model{
 				$valueString = $valueString.",";
 			}
 		}
-		echo $valueString;
 		return $sqlStringPrefix."(".$valueString.")";
 	}
 	
@@ -96,7 +94,8 @@ class SqlOp extends Model{
 	}
 
 	public function selectItem($tableName, $searchKey, $searchValue){
-		return $this->queryTo($this->getSelectSqlString($tableName, $searchKey, $searchValue));
+		$this->queryTo($this->getSelectSqlString($tableName, $searchKey, $searchValue));
+		return mysql_fetch_array($this->result);
 	}
 	
 	public function getSelectSqlString($tableName, $searchKey, $searchValue) {

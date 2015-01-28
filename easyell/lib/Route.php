@@ -41,7 +41,6 @@ class Route extends Model {
 		
 		$result = $route_controller_obj->set_param($param);
 		
-		$this->load('io/ouput.php');
 	}
 }
 ?>
