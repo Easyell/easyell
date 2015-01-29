@@ -45,7 +45,7 @@ class Group_User extends model{
 	public function inserGroup_User($id, $groupid, $userid, $projectid) {
 		$valueArray = array($id, $groupid, $userid, $projectid);
 		$this->sqlop->connectTo();
-		$result = $this->sqlop->insertTo("Project", $valueArray);
+		$result = $this->sqlop->insertTo("Group_User", $valueArray);
 		$this->sqlop->close();
 		return $result;
 	}
@@ -54,7 +54,7 @@ class Group_User extends model{
 
 	public function updateGroup_User($setKeys,$setValues,$searchKey,$searchValue) {
 		$this->sqlop->connectTo();
-		$result = $this->sqlop->updateItem("Project", $setKeys,$setValues,$searchKey,$searchValue);
+		$result = $this->sqlop->updateItem("Group_User", $setKeys,$setValues,$searchKey,$searchValue);
 		$this->sqlop->close();
 		return $result;
 	}
@@ -63,14 +63,14 @@ class Group_User extends model{
 
 	private function selectGroup_UserWithKeyAndValue($key, $value) {
 		$this->sqlop->connectTo();
-		$result = $this->sqlop->selectItem("Project", $key, $value);
+		$result = $this->sqlop->selectItem("Group_User", $key, $value);
 		$this->close();
 		return $result;
 	}
 
 	private function deleteGroup_UserWithKeyAndValue($key, $value) {
 		$this->sqlop->connectTo();
-		$result = $this->sqlop->deleteItem("Project", $key, $value);
+		$result = $this->sqlop->deleteItem("Group_User", $key, $value);
 		$this->close();
 		return $result;
 	}
