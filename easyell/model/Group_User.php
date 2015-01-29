@@ -1,79 +1,85 @@
 <?php
 class Group_User extends model{	
+	public $id;
+   	public $groupid;
+	public $userid;
+	public $projectid;
 	public function __construct() {
 		$this->load('tools/SqlOp.php');
 	}
 	
 //PublicMethod
- 	public static function out() {
-		echo 1;
-	}
+
 //Select
-	public function selectGroup_UserWithId($id) {
-		return $this->selectGroup_UserWithKeyAndValue("id", $id);
+	public static function selectGroup_UserWithId($id) {
+		return self::selectGroup_UserWithKeyAndValue("id", $id);
 	}
 	
-	public function selectGroup_UserWithUserId($id) {
-		return $this->selectGroup_UserWithKeyAndValue("userid", $id);
+	public static function selectGroup_UserWithUserId($id) {
+		return self::selectGroup_UserWithKeyAndValue("userid", $id);
 	}
 
-	public function selectGroup_UserWithProjectId($id) {
-		return $this->selectGroup_UserWithKeyAndValue("projectid", $id);
+	public static function selectGroup_UserWithProjectId($id) {
+		return self::selectGroup_UserWithKeyAndValue("projectid", $id);
 	}
 	
-	public function selectGroup_UserWithGroupId($id) {
-		return $this->selectGroup_UserWithKeyAndValue("groupid", $id);
+	public static function selectGroup_UserWithGroupId($id) {
+		return self::selectGroup_UserWithKeyAndValue("groupid", $id);
 	}	
 
 //Delete
 
-	public function deleteGroup_UserWithId($id) {
-		$this->deleteGroup_UserWithKeyAndValue("id", $id);
+	public static function deleteGroup_UserWithId($id) {
+		return self::deleteGroup_UserWithKeyAndValue("id", $id);
 	}
 	
-	public function deleteGroup_UserWithUserId($id) {
-		$this->deleteGroup_UserWithKeyAndValue("userid", $id);
+	public static function deleteGroup_UserWithUserId($id) {
+		return self::deleteGroup_UserWithKeyAndValue("userid", $id);
 	}
 
-	public function deleteGroup_UserWithProjectId($id) {
-		$this->deleteGroup_UserWithKeyAndValue("projectid", $id);
+	public static function deleteGroup_UserWithProjectId($id) {
+		return self::eleteGroup_UserWithKeyAndValue("projectid", $id);
 	}
 	
-	public function deleteGroup_UserWithGroupId($id) {
-		$this->deleteGroup_UserWithKeyAndValue("groupid", $id);
+	public static function deleteGroup_UserWithGroupId($id) {
+		return self::deleteGroup_UserWithKeyAndValue("groupid", $id);
 	}
 	
 //Insert
-	public function inserGroup_User($id, $groupid, $userid, $projectid) {
+	public static function inserGroup_User($id, $groupid, $userid, $projectid) {
 		$valueArray = array($id, $groupid, $userid, $projectid);
-		$this->SqlOp->connectTo();
-		$result = $this->SqlOp->insertTo("Project", $valueArray);
-		$this->SqlOp->close();
+		$sqlOp = new SqlOp();
+		$sqlOp->connectTo();
+		$result = $sqlOp->insertTo("Group_User", $valueArray);
+		$sqlOp->close();
 		return $result;
-	}
+}
 
 //Update
 
-	public function updateGroup_User($setKeys,$setValues,$searchKey,$searchValue) {
-		$this->SqlOp->connectTo();
-		$result = $this->SqlOp->updateItem("Project", $setKeys,$setValues,$searchKey,$searchValue);
-		$this->SqlOp->close();
+	public static function updateGroup_User($setKeys,$setValues,$searchKey,$searchValue) {
+		$sqlOp = new SqlOp();
+		$sqlOp->connectTo();
+		$result = $sqlOp->updateItem("Group_User", $setKeys,$setValues,$searchKey,$searchValue);
+		$sqlOp->close();
 		return $result;
 	}
 
 //PrivateMethod
 
-	private function selectGroup_UserWithKeyAndValue($key, $value) {
-		$this->SqlOp->connectTo();
-		$result = $this->SqlOp->selectItem("Project", $key, $value);
-		$this->SqlOp->close();
+	private static function selectGroup_UserWithKeyAndValue($key, $value) {
+		$sqlOp = new SqlOp();
+		$sqlOp->connectTo();
+		$result = $sqlOp->selectItem("Group_User", $key, $value);
+		$sqlOp->close();
 		return $result;
 	}
 
-	private function deleteGroup_UserWithKeyAndValue($key, $value) {
-		$this->SqlOp->connectTo();
-		$result = $this->SqlOp->deleteItem("Project", $key, $value);
-		$this->close();
+	private static function deleteGroup_UserWithKeyAndValue($key, $value) {
+		$sqlOp = new SqlOp();
+		$sqlOp->connectTo();
+		$result = $sqlOp->deleteItem("Group_User", $key, $value);
+		$sqlOp->close();
 		return $result;
 	}
 

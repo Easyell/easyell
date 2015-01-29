@@ -57,34 +57,34 @@ class Project extends Model {
 
 	public function insertProject($id, $projectname, $groupid, $adminid, $createrid, $description, $createdate) {
 		$valueArray = array($id, $projectname, $groupid, $adminid, $createrid, $description, $createdate);
-		$this->sqlop->connectTo();
-		$result = $this->sqlop->insertTo("Project", $valueArray);
-		$this->sqlop->close();
+		$this->SqlOp->connectTo();
+		$result = $this->SqlOp->insertTo("Project", $valueArray);
+		$this->SqlOp->close();
 		return $result;
 	}
 
 //Update
 
 	public function updateProject($setKeys, $setValues, $searchKey, $searchValue) {
-		$this->sqlop->connectTo();
-		$result =$this->sqlop->updateItem("Project",$setKeys, $setValues, $searchKey, $searchValue);
-		$this->sqlop->close();
+		$this->SqlOp->connectTo();
+		$result =$this->SqlOp->updateItem("Project",$setKeys, $setValues, $searchKey, $searchValue);
+		$this->SqlOp->close();
 		return $result;
 	}
 
 //Private Method
 
 	private function selectProjectWithSearchKeyAndValue($key, $value) {
-		$this->sqlop->connectTo();
-		$result = $this->sqlop->selectItem("Project", $key, $value);
-		$this->sqlop->close();
+		$this->SqlOp->connectTo();
+		$result = $this->SqlOp->selectItem("Project", $key, $value);
+		$this->SqlOp->close();
 		return $result;
 	}
 	
 	private function deleteProject($key, $value) {
-		$this->sqlop->connectTo();
-		$result = $this->sqlop->deleteItem("Project", $key, $value);	
-		$this->sqlop->close();
+		$this->SqlOp->connectTo();
+		$result = $this->SqlOp->deleteItem("Project", $key, $value);	
+		$this->SqlOp->close();
 		return $result;
 	}
 
