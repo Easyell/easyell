@@ -35,8 +35,12 @@ class A extends Controller{
 	//--select
 		//echo json_encode($this->SqlOp->selectItem("User",'id', 7));
 ///////////////////////////////////////////////////////Group_User.php Test
-	//	$this->load('Group_User.php');
-	//	Group_User::inserGroup_User('9', '2', '2', 0);
+		$this->load('Group_User.php');
+		//if(Group_User::inserGroup_User('7', '2', '2', 0)) {
+		//	echo 'true';
+		//} else {
+		//	echo 'false';
+		//}
 	//	Group_User::inserGroup_User('8', '2', '2', '');
 		//Group_User::deleteGroup_UserWithId(7);
 	 //	$result1 = Group_User::selectGroup_UserWithId(7);
@@ -48,8 +52,15 @@ class A extends Controller{
 		//echo 'id:'.$object->id.'</br>';
 		//echo 'groupid'.$object->groupid.'</br>';
 		//$object->deleteObject();
-		//$result2 = Group_User::selectGroup_UserWithId(9);
-		//echo json_encode($result2);
+		$result2 = Group_User::selectGroup_UserWithProjectId(1);
+		echo json_encode($result2);
+		//$object = new Group_User();
+		//$object->id = 14;
+		//$object->groupid = 0;
+		//$object->userid = 1;
+		//$object->projectid = 2;
+		//$object->saveObject();
+		
 ///////////////////////////////////////////////////
 	//$this->load('Project.php');
 	

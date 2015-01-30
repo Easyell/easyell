@@ -95,7 +95,7 @@ class SqlOp extends Model{
 
 	public function selectItem($tableName, $searchKey, $searchValue){
 		$this->queryTo($this->getSelectSqlString($tableName, $searchKey, $searchValue));
-		return mysql_fetch_array($this->result);
+		return mysql_fetch_array($this->result, MYSQL_ASSOC);
 	}
 	
 	public function getSelectSqlString($tableName, $searchKey, $searchValue) {

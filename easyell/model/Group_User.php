@@ -10,7 +10,6 @@ class Group_User extends model{
 	
 
 // PublicMethod
-
 	public static function selectObjectWithId($id) {
 		$array = self::selectGroup_UserWithKeyAndValue('id', $id);
 		$object = new Group_User();
@@ -27,6 +26,24 @@ class Group_User extends model{
 		$this->SqlOp->close();
 		return $result;
 	}
+
+	public function saveObject() {
+		$this->SqlOp->connectTo();
+		$values = array($this->id, $this->groupid, $this->userid, $this->projectid);
+		$result = $this->SqlOp->insertTo('Group_User', $values);
+		if($result) {
+			$this->SqlOp->close();
+			return $result;
+		} else {
+			$keys = array('groupid', 'userid', 'projectid');
+			$values = array($this->groupid, $this->userid, $this->projectid);
+			$result = $this->SqlOp->updateItem('Group_User', $keys, $values, 'id', $this->id);
+			$this->SqlOp->close();
+			return $result;
+		}
+	}
+
+//static function for ModelOption
 //Select
 	public static function selectGroup_UserWithId($id) {
 		return self::selectGroup_UserWithKeyAndValue("id", $id);
@@ -45,7 +62,6 @@ class Group_User extends model{
 	}	
 
 //Delete
-
 	public static function deleteGroup_UserWithId($id) {
 		return self::deleteGroup_UserWithKeyAndValue("id", $id);
 	}
@@ -83,7 +99,6 @@ class Group_User extends model{
 	}
 
 //PrivateMethod
-
 	private static function selectGroup_UserWithKeyAndValue($key, $value) {
 		$sqlOp = new SqlOp();
 		$sqlOp->connectTo();
@@ -99,6 +114,5 @@ class Group_User extends model{
 		$sqlOp->close();
 		return $result;
 	}
-
 }
 ?>
