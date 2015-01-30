@@ -32,7 +32,7 @@ class Route extends Model {
 		//实例化该控制器,并返回
 		$class_name = $this->Tools->get_php_filename($controller);
 
-		require_once $this->controller_dir.$controller;
+		include_once $this->controller_dir.$controller;
 		$route_controller_obj = new $class_name();
 
 		//验证继承 和 是否带有set_param方法

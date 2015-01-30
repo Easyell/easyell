@@ -33,9 +33,8 @@ class Controller{
 		if(!file_exists($model_path)){
 			exit('controller load model ['.$model_path.']  does not exist');
 		}
-		echo "[model_path:".$model_path."]";
+
 		$model_name = $this->get_filename($model_path);
-		echo "[model_name:".$model_name."]";
 		if($model_name){
 			if( $this->loaded_model_cache[$model_name]){
 				return;
@@ -43,7 +42,7 @@ class Controller{
 		}else{
 			return;
 		}
-		require_once $model_path;
+		include_once $model_path;
 		$model_instance = new $model_name();
 		//验证 model的继承
 		if(!$model_instance instanceof Model){

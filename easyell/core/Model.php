@@ -41,7 +41,7 @@ class Model{
 		}else{
 			return;
 		}
-		require_once $model_path;
+		include_once $model_path;
 		$model_instance = new $model_name();
 		//验证 model的继承
 		if(!$model_instance instanceof Model){

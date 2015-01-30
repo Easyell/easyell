@@ -17,10 +17,10 @@ $route_path = 'Route.php';
 
 $application_folder = 'application';
 
-require_once $core_path.$controller_path;
-require_once $core_path.$model_path;
-require_once $lib_path.$route_path;
-require_once 'config/fn_map.php';
+include_once $core_path.$controller_path;
+include_once $core_path.$model_path;
+include_once $lib_path.$route_path;
+include_once 'config/fn_map.php';
 
 
 $route = new Route();
