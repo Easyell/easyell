@@ -36,18 +36,22 @@ class A extends Controller{
 		//echo json_encode($this->SqlOp->selectItem("User",'id', 7));
 ///////////////////////////////////////////////////////Group_User.php Test
 	//	$this->load('Group_User.php');
-	//	Group_User::inserGroup_User('9', '2', '2', '');
+	//	Group_User::inserGroup_User('9', '2', '2', 0);
 	//	Group_User::inserGroup_User('8', '2', '2', '');
 		//Group_User::deleteGroup_UserWithId(7);
 	 //	$result1 = Group_User::selectGroup_UserWithId(7);
 	 	//$keys = array('groupid', 'projectid');
 		//$values = array(1,0);
 		//Group_User::updateGroup_User($keys, $values, 'id', 9);
-	//	$result2 = Group_User::selectGroup_UserWithId(9);
 		//echo json_encode($result1);
-	//	echo json_encode($result2);
+		//$object = Group_User::selectObjectWithId(9);
+		//echo 'id:'.$object->id.'</br>';
+		//echo 'groupid'.$object->groupid.'</br>';
+		//$object->deleteObject();
+		//$result2 = Group_User::selectGroup_UserWithId(9);
+		//echo json_encode($result2);
 ///////////////////////////////////////////////////
-	$this->load('Project.php');
+	//$this->load('Project.php');
 	
 	}
 }

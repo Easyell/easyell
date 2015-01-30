@@ -8,8 +8,25 @@ class Group_User extends model{
 		$this->load('tools/SqlOp.php');
 	}
 	
-//PublicMethod
 
+// PublicMethod
+
+	public static function selectObjectWithId($id) {
+		$array = self::selectGroup_UserWithKeyAndValue('id', $id);
+		$object = new Group_User();
+		$object->id = $array['id'];
+		$object->groupid = $array['groupid'];
+		$object->userid = $array['userid'];
+		$object->projectid = $array['projectid'];
+		return $object;	
+	}
+
+	public function deleteObject() {
+		$this->SqlOp->connectTo();
+		$result = $this->SqlOp->deleteItem('Group_User', 'id', $this->id);
+		$this->SqlOp->close();
+		return $result;
+	}
 //Select
 	public static function selectGroup_UserWithId($id) {
 		return self::selectGroup_UserWithKeyAndValue("id", $id);
