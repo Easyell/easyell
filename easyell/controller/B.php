@@ -1,5 +1,7 @@
 <?php
-//这是一个示例文件，没点屁用
+/*
+ * 
+ */
 class B extends Controller{
 
 	private $name = 'B';
@@ -7,7 +9,12 @@ class B extends Controller{
 	public function __constructr(){
 		
 	}
-	
+	public function set_param(){
+		$result = array();
+		
+		
+		return $result;
+	}
 	public function load($name){
 		$this->name = $name;
 	}
