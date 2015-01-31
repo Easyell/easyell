@@ -1,48 +1,6 @@
 <?php
-class Group_User extends model{	
-	public $id;
-   	public $groupid;
-	public $userid;
-	public $projectid;
-	public function __construct() {
-		$this->load('tools/SqlOp.php');
-	}
+class Group_User_Op {
 	
-
-// PublicMethod
-	public static function selectObjectWithId($id) {
-		$array = self::selectGroup_UserWithKeyAndValue('id', $id);
-		$object = new Group_User();
-		$object->id = $array['id'];
-		$object->groupid = $array['groupid'];
-		$object->userid = $array['userid'];
-		$object->projectid = $array['projectid'];
-		return $object;	
-	}
-
-	public function deleteObject() {
-		$this->SqlOp->connectTo();
-		$result = $this->SqlOp->deleteItem('Group_User', 'id', $this->id);
-		$this->SqlOp->close();
-		return $result;
-	}
-
-	public function saveObject() {
-		$this->SqlOp->connectTo();
-		$values = array($this->id, $this->groupid, $this->userid, $this->projectid);
-		$result = $this->SqlOp->insertTo('Group_User', $values);
-		if($result) {
-			$this->SqlOp->close();
-			return $result;
-		} else {
-			$keys = array('groupid', 'userid', 'projectid');
-			$values = array($this->groupid, $this->userid, $this->projectid);
-			$result = $this->SqlOp->updateItem('Group_User', $keys, $values, 'id', $this->id);
-			$this->SqlOp->close();
-			return $result;
-		}
-	}
-
 //static function for ModelOption
 //Select
 	public static function selectGroup_UserWithId($id) {
@@ -89,7 +47,6 @@ class Group_User extends model{
 }
 
 //Update
-
 	public static function updateGroup_User($setKeys,$setValues,$searchKey,$searchValue) {
 		$sqlOp = new SqlOp();
 		$sqlOp->connectTo();
@@ -97,7 +54,6 @@ class Group_User extends model{
 		$sqlOp->close();
 		return $result;
 	}
-
 //PrivateMethod
 	private static function selectGroup_UserWithKeyAndValue($key, $value) {
 		$sqlOp = new SqlOp();
@@ -113,6 +69,46 @@ class Group_User extends model{
 		$result = $sqlOp->deleteItem("Group_User", $key, $value);
 		$sqlOp->close();
 		return $result;
+	}
+}
+
+class Group_User extends model{	
+	public $id;
+   	public $groupid;
+	public $userid;
+	public $projectid;
+	public function __construct() {
+		$this->load('tools/SqlOp.php');
+		$this->SqlOp->connectTo();
+	}
+	
+// PublicMethod
+	public function selectObjectWithId($id) {
+		$array = Group_User_Op::selectGroup_UserWithKeyAndValue('id', $id);
+		$object = new Group_User();
+		$object->id = $array['id'];
+		$object->groupid = $array['groupid'];
+		$object->userid = $array['userid'];
+		$object->projectid = $array['projectid'];
+		return $object;	
+	}
+
+	public function deleteObject() {
+		$result = $this->SqlOp->deleteItem('Group_User', 'id', $this->id);
+		return $result;
+	}
+
+	public function saveObject() {
+		$values = array($this->id, $this->groupid, $this->userid, $this->projectid);
+		$result = $this->SqlOp->insertTo('Group_User', $values);
+		if($result) {
+			return $result;
+		} else {
+			$keys = array('groupid', 'userid', 'projectid');
+			$values = array($this->groupid, $this->userid, $this->projectid);
+			$result = $this->SqlOp->updateItem('Group_User', $keys, $values, 'id', $this->id);
+			return $result;
+		}
 	}
 }
 ?>
