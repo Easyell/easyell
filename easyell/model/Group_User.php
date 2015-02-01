@@ -12,12 +12,37 @@ class Group_User extends model{
 // PublicMethod
 	public static function selectObjectWithId($id) {
 		$array = self::selectGroup_UserWithKeyAndValue('id', $id);
+		$objectArray = array();
+		for ($i = 0; $i < count($array); $i ++) {
+			array_push($objectArray,  self::createObjectWith($array[$i]['id'], $array[$i]['groupid'], $array[$i]['userid'], $array[$i]['projectid']));
+		}
+		return $objectArray;
+	}
+	
+	public static function all() {
+		$array = self::selectAll();
+		$objectArray = array();
+		for ($i = 0; $i < count($array); $i ++) {
+			array_push($objectArray,  self::createObjectWith($array[$i]['id'], $array[$i]['groupid'], $array[$i]['userid'], $array[$i]['projectid']));
+		}
+		return $objectArray;
+	}
+
+	public static function selectAll() {
+		$sqlOp = new SqlOp();
+		$sqlOp->connectTo();
+		$result = $sqlOp->selectAll('Group_User');
+		$sqlOp->close();
+		return $result;
+	}
+
+	private static function createObjectWith($id, $groupid, $userid, $projectid) {
 		$object = new Group_User();
-		$object->id = $array['id'];
-		$object->groupid = $array['groupid'];
-		$object->userid = $array['userid'];
-		$object->projectid = $array['projectid'];
-		return $object;	
+		$object->id = $id;
+		$object->groupid = $groupid;
+		$object->userid = $userid;
+		$object->projectid = $projectid;
+		return $object;
 	}
 
 	public function deleteObject() {
