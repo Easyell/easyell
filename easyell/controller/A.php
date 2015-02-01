@@ -39,11 +39,11 @@ class A extends Controller{
 	//--select
 		//echo json_encode($this->SqlOp->selectItem("User",'id', 7));
 ///////////////////////////////////////////////////////Group_User.php Test
-		$this->load('Group_User.php');
-		$array = Group_User::all();
-		for($i = 0;$i < count($array); $i ++) {
-			echo json_encode($array[$i]);
-		}
+		//$this->load('Group_User.php');
+		//$array = Group_User::all();
+		//for($i = 0;$i < count($array); $i ++) {
+		//	echo json_encode($array[$i]);
+		//}
 	//	echo json_encode(Group_User::selectAll());
 		//if(Group_User::inserGroup_User('7', '2', '2', 0)) {
 		//	echo 'true';
@@ -72,7 +72,39 @@ class A extends Controller{
 		//$object->saveObject();
 		
 ///////////////////////////////////////////////////
-	//$this->load('Project.php');
+		//$this->load('Project.php');
+		//$this->testBoolValue(Project::insertProject(3,'threeproject',1,2,2,'threethree', 111000111));
+		//$this->testBoolValue(Project::deleteProjectWithProjectId(3));
+		//$this->testBoolValue(Project::deleteProjectWithProjectName('threeproject'));
+		//$keys = array('description', 'createdate');
+		//$values = array('three project, three project', '222222222');
+		//$this->testBoolValue(Project::updateProject($keys, $values, 'id', 3));
+		//echo json_encode(Project::selectProjectWithid(1));
+		//echo json_encode(Project::selectProjectWithName('threeproject'));
+		//echo json_encode(Project::selectProjectWithGroupId(1));
+		//echo json_encode(Project::selectProjectWithAdminId(1));
+		//echo json_encode(Project::selectProjectWithCreaterId(1));
 	
+/////////////////////////////////////////////////////////
+		$this->load('User.php');
+		$this->testBoolValue(User::insertUser(6, 'guoshencheng1', 'guoshencheng1','123456', 'afadagagre', 'andna@akak.com', '959595919191'));
+		//$this->testBoolValue(User::deleteUserWithId(6));
+		//$this->testBoolValue(User::deleteUserWithUsername('guoshencheng1'));
+		$this->testBoolValue(User::deleteUserWithAccount('guoshencheng1'));
+		//$keys = array('username', 'password');
+		//$values = array('guoshencheng2', '234567');
+		//$this->testBoolValue(User::updateUser($keys, $values, 'id', 6));
+		//User::deleteModel();
+		echo json_encode(User::selectUserWithId(6));
+		//echo json_encode(User::selectUserWithAcount('guoshencheng'));
+		//echo json_encode(User::selectUserWithUsername('guoshencheng'));
+	}
+
+	private function testBoolValue($bool) {
+		if($bool) {
+			echo 'success';
+		} else {
+			echo 'fail';
+		}
 	}
 }
