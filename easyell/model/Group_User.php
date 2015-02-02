@@ -1,6 +1,5 @@
 <?php
 class Group_User_Op {
-	
 //static function for ModelOption
 //Select
 	public static function selectGroup_UserWithId($id) {
@@ -82,31 +81,61 @@ class Group_User extends model{
 		$this->SqlOp->connectTo();
 	}
 	
-// PublicMethod
-	public function selectObjectWithId($id) {
+// PublicMethodi
+		public static function selectObjectWithId($id) {
 		$array = Group_User_Op::selectGroup_UserWithKeyAndValue('id', $id);
+		$objectArray = array();
+		for ($i = 0; $i < count($array); $i ++) {
+			array_push($objectArray,  self::createObjectWith($array[$i]['id'], $array[$i]['groupid'], $array[$i]['userid'], $array[$i]['projectid']));
+		}
+		return $objectArray;
+	}
+	
+	public static function all() {
+		$array = self::selectAll();
+		$objectArray = array();
+		for ($i = 0; $i < count($array); $i ++) {
+			array_push($objectArray,  self::createObjectWith($array[$i]['id'], $array[$i]['groupid'], $array[$i]['userid'], $array[$i]['projectid']));
+		}
+		return $objectArray;
+	}
+
+	public static function selectAll() {
+		$sqlOp = new SqlOp();
+		$sqlOp->connectTo();
+		$result = $sqlOp->selectAll('Group_User');
+		$sqlOp->close();
+		return $result;
+	}
+
+	private static function createObjectWith($id, $groupid, $userid, $projectid) {
 		$object = new Group_User();
-		$object->id = $array['id'];
-		$object->groupid = $array['groupid'];
-		$object->userid = $array['userid'];
-		$object->projectid = $array['projectid'];
-		return $object;	
+		$object->id = $id;
+		$object->groupid = $groupid;
+		$object->userid = $userid;
+		$object->projectid = $projectid;
+		return $object;
 	}
 
 	public function deleteObject() {
+		$this->SqlOp->connectTo();
 		$result = $this->SqlOp->deleteItem('Group_User', 'id', $this->id);
+		$this->SqlOp->close();
 		return $result;
 	}
 
 	public function saveObject() {
+		$this->SqlOp->connectTo();
 		$values = array($this->id, $this->groupid, $this->userid, $this->projectid);
 		$result = $this->SqlOp->insertTo('Group_User', $values);
 		if($result) {
+			$this->SqlOp->close();
 			return $result;
 		} else {
 			$keys = array('groupid', 'userid', 'projectid');
 			$values = array($this->groupid, $this->userid, $this->projectid);
 			$result = $this->SqlOp->updateItem('Group_User', $keys, $values, 'id', $this->id);
+			$this->SqlOp->close();
 			return $result;
 		}
 	}

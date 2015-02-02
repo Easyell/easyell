@@ -10,51 +10,65 @@ class User extends Model {
 	private $phone;
 	function __construct() {
 		$this->load('tools/SqlOp.php');
-		//$this->load('Group_User.php');
 	}
 
 	//Public Method
-	public function insertUser($id, $account, $username, $password, $avatar, $email, $phone) {
-		$valueArray = array($id, $account, $username, $password, $avatar, $email, $phone);
-		$this->SqlOp->connectTo();
-		$result = $this->SqlOp->insertTo("User", $valueArray);
-		$this->SqlOp->close();
+	public static function insertUser($id, $account, $username, $password, $avatar, $email, $phone) {
+		$values = array($id, $account, $username, $password, $avatar, $email, $phone);
+		$sqlOp = new SqlOp();
+		$sqlOp->connectTo();
+		$result = $sqlOp->insertTo('User', $values);
+		$sqlOp->close();
 		return $result;
 	}
 
-	public function updateUser($setKeys, $setValues, $searchKey, $searchValue) {
-		$this->SqlOp->connectTo();
-		$result = $this->SqlOp->updateItem("User", $setKeys, $setValues, $searchKey, $searchValue);
-		$this->SqlOp->close();
+	public static function updateUser($setKeys, $setValues, $searchKey, $searchValue) {
+		$sqlOp = new SqlOp();
+		$sqlOp->connectTo();
+		$result = $sqlOp->updateItem('User', $setKeys, $setValues, $searchKey, $searchValue);
+		$sqlOp->close();
 		return $result;
 	}
 
-	public function selectUserWithId($id) {
-		return $this->selectUserWithSearchKeyAndValue('id', $id);
+	public static function selectUserWithId($id) {
+		return self::selectUserWithSearchKeyAndValue('id', $id);	
 	}
 
-	public function selectUserWithAcount($account) {
-		return $this->selectUserWithSearchKeyAndValue('account', $account);
+	public static function selectUserWithAcount($account) {
+		return self::selectUserWithSearchKeyAndValue('account', $account);
 	}
 
-	public function selectUserWithUsername($username) {
-		return $this->selectUserWithSearchKeyAndValue('username', $username);
+	public static function selectUserWithUsername($username) {
+		return self::selectUserWithSearchKeyAndValue('username', $username);
 	}
 
-	public function deleteModel() {
-		$this->SqlOp->connectTo();
-		$result = $this->SqlOp->deleteItem("User", 'id', $this->id);
-		$this->SqlOp->close();
-		return $result;
+	public static function deleteUserWithId($id) {
+		return self::deleteUserWithKeyAndValue('id', $id);
+	}
+
+	public static function deleteUserWithUsername($username) {
+		return self::deleteUserWithKeyAndValue('username', $username);
+	}
+
+	public static function deleteUserWithAccount($account) {
+		return self::deleteUserWithKeyAndValue('account', $account);
 	}
 
 	//Private Method
-	private function selectUserWithSearchKeyAndValue($key, $value) {
-		$this->SqlOp->connectTo();
-		$result = $this->SqlOp->selectItem("User", $key, $value);
-		$this->SqlOp->close();
+	private static function selectUserWithSearchKeyAndValue($key, $value) {
+		$sqlOp = new SqlOp();
+		$sqlOp->connectTo();
+		$result = $sqlOp->selectItem('User', $key, $value);
+		$sqlOp->close();
 		return $result;
 	}
-
+	
+	private static function deleteUserWithKeyAndValue($key, $value) {
+		$sqlOp = new SqlOp();
+		$sqlOp->connectTo();
+		$result = $sqlOp->deleteItem('User', $key, $value);
+		$sqlOp->close();
+		return $result;
+	}
 }
 ?>

@@ -11,80 +11,84 @@ class Project extends Model {
 	
 //Select
 
-	public function selectProjectWithid($id) {
-		return $this->selectProjectWithSearchKeyAndValue("id", $id);	
+	public static function selectProjectWithid($id) {
+		return self::selectProjectWithSearchKeyAndValue("id", $id);	
 	}
 	
-	public function selectProjectWithName($name) {
-		return $this->selectProjectWithSearchKeyAndValue("projectname", $name);
+	public static function selectProjectWithName($name) {
+		return self::selectProjectWithSearchKeyAndValue("projectname", $name);
 	}
 
-	public function selectProjectWithGroupId($groupId) {
-		return $this->selectProjectWithSearchKeyAndValue("groupid", $groupId);
+	public static function selectProjectWithGroupId($groupId) {
+		return self::selectProjectWithSearchKeyAndValue("groupid", $groupId);
 	}
 
-	public function selectProjectWithAdminId($adminId) {
-		return $this->selectProjectWithSearchKeyAndValue("adminid", $adminId);
+	public static function selectProjectWithAdminId($adminId) {
+		return self::selectProjectWithSearchKeyAndValue("adminid", $adminId);
 	}
 
-	public function selectProjectWithCreateId($createrId) {
-		return $this->selectProjectWithSearchKeyAndValue("createrid", $createrId);
+	public static function selectProjectWithCreaterId($createrId) {
+		return self::selectProjectWithSearchKeyAndValue("createrid", $createrId);
 	}
 
 //Delete
 
 	public function deleteProjectWithProjectId($id) {
-		return ($this->deleteProject("id",$id) && $this->group_user->deleteGroup_UserWithId($id));
+		return self::deleteProject("id",$id);
 	}
 
 	public function deleteProjectWithProjectName($projectname) {
-		return $this->deleteProject("projectname", $projectname);
+		return self::deleteProject("projectname", $projectname);
 	}
 	
 	public function deleteProjectWithGroupId($groupId) {
-		return $this->deleteProject("groupid", $groupId);
+		return self::deleteProject("groupid", $groupId);
 	}
 
 	public function deleteProjectWithAdminId($adminId) {
-		return $this->deleteProject("adminid", $adminId);
+		return self::deleteProject("adminid", $adminId);
 	}
 	
 	public function deleteProjectWithCreateId($createrId) {
-		return $this->deleteProject("createrid", $createrId);
+		return self::deleteProject("createrid", $createrId);
 	}
 
 //Insert
 
-	public function insertProject($id, $projectname, $groupid, $adminid, $createrid, $description, $createdate) {
+	public static function insertProject($id, $projectname, $groupid, $adminid, $createrid, $description, $createdate) {
 		$valueArray = array($id, $projectname, $groupid, $adminid, $createrid, $description, $createdate);
-		$this->SqlOp->connectTo();
-		$result = $this->SqlOp->insertTo("Project", $valueArray);
-		$this->SqlOp->close();
+		$sqlOp = new SqlOp();
+		$sqlOp->connectTo();
+		$result = $sqlOp->insertTo("Project", $valueArray);
+		$sqlOp->close();
 		return $result;
 	}
 
 //Update
 
-	public function updateProject($setKeys, $setValues, $searchKey, $searchValue) {
-		$this->SqlOp->connectTo();
-		$result =$this->SqlOp->updateItem("Project",$setKeys, $setValues, $searchKey, $searchValue);
-		$this->SqlOp->close();
+	public static function updateProject($setKeys, $setValues, $searchKey, $searchValue) {
+		$sqlOp = new SqlOp();
+		$sqlOp->connectTo();
+		$result = $sqlOp->updateItem("Project",$setKeys, $setValues, $searchKey, $searchValue);
+		$sqlOp->close();
 		return $result;
 	}
 
 //Private Method
 
-	private function selectProjectWithSearchKeyAndValue($key, $value) {
-		$this->SqlOp->connectTo();
-		$result = $this->SqlOp->selectItem("Project", $key, $value);
-		$this->SqlOp->close();
+	private static function selectProjectWithSearchKeyAndValue($key, $value) {
+		$sqlOp = new SqlOp();
+		$sqlOp->connectTo();
+		$result = $sqlOp->selectItem("Project", $key, $value);
+		$sqlOp->close();
 		return $result;
 	}
 	
-	private function deleteProject($key, $value) {
-		$this->SqlOp->connectTo();
-		$result = $this->SqlOp->deleteItem("Project", $key, $value);	
-		$this->SqlOp->close();
+	private static function deleteProject($key, $value) {
+		$sqlOp = new SqlOp();
+		$sqlOp->connectTo();
+		$result = $sqlOp->deleteItem("Project", $key, $value);	
+		$sqlOp->close();
 		return $result;
 	}
 
