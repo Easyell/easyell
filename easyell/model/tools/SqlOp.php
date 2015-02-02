@@ -8,13 +8,15 @@ class SqlOp extends Model{
 	private $db;
 	private $db_name = 'LightTracker';
 
-	public $connect;
+	public $connect = FALSE;
 	public $result;
 		
 	function __construct() {
 		$this->adress = "127.0.0.1".$this->port;
 		$this->account = "root";
 		$this->password = 123456;
+		
+		$this->connectTo();
 	}
 	public function setProperty($_ad,$_ac,$_ps,$_dbName){
 		$this->adress = $_ad.$this->port;
@@ -24,6 +26,9 @@ class SqlOp extends Model{
 		return TRUE;
 	}
 	public function connectTo(){
+		if($this->connect){
+			return TRUE;
+		}
 		$this->connect = mysql_connect($this->adress,$this->account,$this->password);
 		mysql_set_charset('utf8',$this->connect);
 		if($this->connect){
