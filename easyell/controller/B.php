@@ -9,11 +9,8 @@ class B extends Controller{
 	public function __constructr(){
 		
 	}
-	public function set_param(){
-		$result = array();
-		
-		
-		return $result;
+	public function set_param($param){
+		return $param;
 	}
 	public function load($name){
 		$this->name = $name;

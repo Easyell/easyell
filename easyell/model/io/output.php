@@ -21,7 +21,10 @@ class Output extends Model{
 		$result = TRUE;
 		$data = null;
 		
-		if(is_array($paramArr)){
+		$callback = null;
+		$returnJson = null;
+		
+		if(is_array($paramArr) || is_object($paramArr)){
 			if($isFilter){
 				$tmp = array();
 				foreach ($paramArr as $key => $value) {
@@ -39,19 +42,31 @@ class Output extends Model{
 				$callback = $_POST[$this->callbackName];
 			}
 			
-			//jsonp
-			if($callback){
-				header("Content-type: text/html");
-				echo $callback.'('.$returnJson.');';
-			//json
-			}else{
-				header("Content-type: application/json");
-				echo $returnJson;			
+		}else if(isset($paramArr)){
+				
+			$callback = $_GET[$this->callbackNamel];
+			if(!$callback){
+				$callback = $_POST[$this->callbackName];
 			}
+			
+			$paramArr = array($paramArr);
+			$returnJson = json_encode($paramArr);
+			
 		}else{
 			$result = FALSE;
 			$data = 'first param isnt number';
 		}
+
+		//jsonp
+		if($callback){
+			header("Content-type: text/html");
+			echo $callback.'('.$returnJson.');';
+		//json
+		}else{
+			header("Content-type: application/json");
+			echo $returnJson;			
+		}
+
 		
 		return array(
 			'result' => $result,

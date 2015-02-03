@@ -14,8 +14,6 @@ class Route extends Model {
 		$this->fn = intval($this->fn);
 		//随身参数
 		$this->param = $_GET['param'];
-		//jsonp的回调函数名
-		$this->callback = $_GET['callback'];
 		
 		if(!($this->fn && $this->param)){
 			exit('must have fn and param');
@@ -45,6 +43,8 @@ class Route extends Model {
 		
 		$result = $route_controller_obj->set_param($this->param);
 		
+		$this->load('io/output.php');
+		echo $this->output->json($result);
 	}
 }
 ?>
