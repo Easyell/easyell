@@ -44,7 +44,7 @@ class Route extends Model {
 		$result = $route_controller_obj->set_param($this->param);
 		
 		$this->load('io/output.php');
-		echo $this->output->json($result);
+		$this->output->json($result);
 	}
 }
 ?>

@@ -66,7 +66,6 @@ class Output extends Model{
 			header("Content-type: application/json");
 			echo $returnJson;			
 		}
-
 		
 		return array(
 			'result' => $result,
