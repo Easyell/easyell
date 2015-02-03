@@ -14,7 +14,6 @@ class Model{
 	}
 	
 	public function get_filename($path){
-		echo "[path:".$path."]";
 		$extension_len = 4;
 		$path_len = strlen($path);
 
@@ -33,9 +32,9 @@ class Model{
 		if(!file_exists($model_path)){
 			exit('Model load model ['.$model_path.'] does not exist');
 		}
-		echo "[model_path:".$model_path."]";
+
 		$model_name = $this->get_filename($model_path);
-		echo "[model_name:".$model_name."]";
+
 		if($model_name){
 			if( $this->loaded_model_cache[$model_name]){
 				return;
