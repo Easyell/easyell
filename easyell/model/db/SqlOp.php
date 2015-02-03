@@ -95,11 +95,25 @@ class SqlOp extends Model{
 
 	public function selectItem($tableName, $searchKey, $searchValue){
 		$this->queryTo($this->getSelectSqlString($tableName, $searchKey, $searchValue));
-		return mysql_fetch_array($this->result, MYSQL_ASSOC);
+		$array = array();
+		while ($row = mysql_fetch_array($this->result, MYSQL_ASSOC)) {
+			array_push($array, $row);
+		}
+		return $array;
 	}
 	
 	public function getSelectSqlString($tableName, $searchKey, $searchValue) {
 		return "select * from ".$tableName." where ".$searchKey."='".$searchValue."'";
+	}
+
+	public function selectAll($tableName) {
+		$this->queryTo("select * from ".$tableName);
+		$array = array();
+		while ($row = mysql_fetch_array($this->result, MYSQL_ASSOC)) {
+			array_push($array, $row);
+		}
+		return $array;
+	
 	}
 }
 

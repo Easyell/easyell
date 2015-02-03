@@ -11,10 +11,10 @@ class A extends Controller{
 	public function set_param(){
 ///////Test for SqlOp.php///////////////////////////////
 	//--load;
-	// 	$this->load('tools/SqlOp.php');
+	 //	$this->load('tools/SqlOp.php');
 	//--all
 	//	$this->SqlOp->connectTo();
-	//  echo json_encode($this->SqlOp->selectAll('Group_User'));
+	 //	echo json_encode($this->SqlOp->selectAll('Group_User'));
 	//	$this->SqlOp->close();
 	//--connectTo();
 		//if($this->SqlOp->connectTo()) {
@@ -40,52 +40,31 @@ class A extends Controller{
 		//echo json_encode($this->SqlOp->selectItem("User",'id', 7));
 ///////////////////////////////////////////////////////Group_User.php Test
 		//$this->load('Group_User.php');
-		//$array = Group_User::all();
-		//for($i = 0;$i < count($array); $i ++) {
-		//	echo json_encode($array[$i]);
-		//}
-	//	echo json_encode(Group_User::selectAll());
-		//if(Group_User::inserGroup_User('7', '2', '2', 0)) {
-		//	echo 'true';
-		//} else {
-		//	echo 'false';
-		//}
-	//	Group_User::inserGroup_User('8', '2', '2', '');
-		//Group_User::deleteGroup_UserWithId(7);
-	 //	$result1 = Group_User::selectGroup_UserWithId(7);
-	 	//$keys = array('groupid', 'projectid');
-		//$values = array(1,0);
-		//Group_User::updateGroup_User($keys, $values, 'id', 9);
-		//echo json_encode($result1);
-		//echo 1;
-		//$object = Group_User::selectObjectWithId(9)[0];
-		//echo 'id:'.$object->id.'</br>';
-		//echo 'groupid'.$object->groupid.'</br>';
-		//$object->deleteObject();
-		//$result2 = Group_User::selectGroup_UserWithProjectId(1);
-		//echo json_encode($result2);
-		//$object = new Group_User();
-		//$object->id = 14;
-		//$object->groupid = 0;
-		//$object->userid = 1;
-		//$object->projectid = 2;
-		//$object->saveObject();
-		
+		/**
+		$object = new Group_User();
+		$object->id = 1;
+		$object->groupid = 2;
+		$object->userid = 2;
+		$object->projectid = 0;
+		$this->testBoolValue($object->saveObject());
+		**/
+	   	/**
+	   	$sqlOp = new SqlOp();
+	   	$sqlOp->connectTo();
+	   	$array = Group_User::selectObjectWithId(1, $sqlOp);
+		$this->testBoolValue($array[0]->saveObject());
+		$this->testBoolValue($array[0]->saveObject());
+	   	**/
 ///////////////////////////////////////////////////
-		//$this->load('Project.php');
-		//$this->testBoolValue(Project::insertProject(3,'threeproject',1,2,2,'threethree', 111000111));
-		//$this->testBoolValue(Project::deleteProjectWithProjectId(3));
-		//$this->testBoolValue(Project::deleteProjectWithProjectName('threeproject'));
-		//$keys = array('description', 'createdate');
-		//$values = array('three project, three project', '222222222');
-		//$this->testBoolValue(Project::updateProject($keys, $values, 'id', 3));
-		//echo json_encode(Project::selectProjectWithid(1));
-		//echo json_encode(Project::selectProjectWithName('threeproject'));
-		//echo json_encode(Project::selectProjectWithGroupId(1));
-		//echo json_encode(Project::selectProjectWithAdminId(1));
-		//echo json_encode(Project::selectProjectWithCreaterId(1));
-	
+		$this->load('Project.php');
+		$sqlOp = new SqlOp();
+		$sqlOp->connectTo();
+		$array = Project::all($sqlOp);
+		//$array = Project::selectObjectWithId(1, $sqlOp);
+		echo json_encode($array[0]->id);
+		$sqlOp->close();
 /////////////////////////////////////////////////////////
+		/**
 		$this->load('User.php');
 		$this->testBoolValue(User::insertUser(6, 'guoshencheng1', 'guoshencheng1','123456', 'afadagagre', 'andna@akak.com', '959595919191'));
 		//$this->testBoolValue(User::deleteUserWithId(6));
@@ -98,6 +77,7 @@ class A extends Controller{
 		echo json_encode(User::selectUserWithId(6));
 		//echo json_encode(User::selectUserWithAcount('guoshencheng'));
 		//echo json_encode(User::selectUserWithUsername('guoshencheng'));
+		**/
 	}
 
 	private function testBoolValue($bool) {

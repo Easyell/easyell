@@ -1,96 +1,68 @@
 <?php
 class Project extends Model {
-//Struct
-	
+	public $id;
+	public $projectname;
+	public $groupid;
+	public $adminid;
+	public $createrid;
+	public $description;
+	public $createdate;
 	public function __construct() {
-		$this->load('tools/SqlOp.php');
-		$this->load('Group_User.php');
+		$this->load('db/SqlOp.php');
+		$this->SqlOp->connectTo();
 	}
 	
-//Public Method
+	public static function selectObjectWithId($id, &$sqlOp) {
+		$array = $sqlOp->selectItem('Project', 'id', $id);
+		$objectArray = array();
+		for ($i = 0;$i < count($array); $i ++) {
+			array_push($objectArray, self::createObjectWith($array[$i]['id'], $array[$i]['projectname'], $array[$i]['adminid'], $array[$i]['createrid'], $array[$i]['description'], $array[$i]['createdate'], $array[$i]['groupid']));			
+		}
+		return $objectArray;
+	}
+
+	public static function all(&$sqlOp) {
+		$array = $sqlOp->selectAll('Project');
+		$objectArray = array();
+		for ($i = 0;$i < count($array); $i ++) {
+			array_push($objectArray, self::createObjectWith($array[$i]['id'], $array[$i]['projectname'], $array[$i]['adminid'], $array[$i]['createrid'], $array[$i]['description'], $array[$i]['createdate'], $array[$i]['groupid']));		
+		}
+		return $objectArray;
+	}
+
+	public function saveObject() {
+		$this->SqlOp->connectTo();
+		$values = array($this->id, $this->projectname, $this->groupid, $this->adminid, $this->createrid, $this->description, $this->createdate);
+		$result = $this->SqlOp->insertTo('Project', $values);
+		if($result) {
+			$this->SqlOp->close();
+			return $result;
+		} else {
+			$keys = array('projectname', 'groupid', 'adminid', 'createrid', 'description', 'createdate');
+			$values = array($this->projectname, $this->groupid, $this->adminid, $this->createrid, $this->description, $this->createdate);
+			$result = $this->SqlOp->updateItem('Project', $keys, $values, 'id', $this->id);
+			$this->SqlOp->close();
+			return $result;
+		}
+	}	
 	
-//Select
-
-	public static function selectProjectWithid($id) {
-		return self::selectProjectWithSearchKeyAndValue("id", $id);	
-	}
-	
-	public static function selectProjectWithName($name) {
-		return self::selectProjectWithSearchKeyAndValue("projectname", $name);
-	}
-
-	public static function selectProjectWithGroupId($groupId) {
-		return self::selectProjectWithSearchKeyAndValue("groupid", $groupId);
-	}
-
-	public static function selectProjectWithAdminId($adminId) {
-		return self::selectProjectWithSearchKeyAndValue("adminid", $adminId);
-	}
-
-	public static function selectProjectWithCreaterId($createrId) {
-		return self::selectProjectWithSearchKeyAndValue("createrid", $createrId);
-	}
-
-//Delete
-
-	public function deleteProjectWithProjectId($id) {
-		return self::deleteProject("id",$id);
-	}
-
-	public function deleteProjectWithProjectName($projectname) {
-		return self::deleteProject("projectname", $projectname);
-	}
-	
-	public function deleteProjectWithGroupId($groupId) {
-		return self::deleteProject("groupid", $groupId);
-	}
-
-	public function deleteProjectWithAdminId($adminId) {
-		return self::deleteProject("adminid", $adminId);
-	}
-	
-	public function deleteProjectWithCreateId($createrId) {
-		return self::deleteProject("createrid", $createrId);
-	}
-
-//Insert
-
-	public static function insertProject($id, $projectname, $groupid, $adminid, $createrid, $description, $createdate) {
-		$valueArray = array($id, $projectname, $groupid, $adminid, $createrid, $description, $createdate);
-		$sqlOp = new SqlOp();
-		$sqlOp->connectTo();
-		$result = $sqlOp->insertTo("Project", $valueArray);
-		$sqlOp->close();
-		return $result;
-	}
-
-//Update
-
-	public static function updateProject($setKeys, $setValues, $searchKey, $searchValue) {
-		$sqlOp = new SqlOp();
-		$sqlOp->connectTo();
-		$result = $sqlOp->updateItem("Project",$setKeys, $setValues, $searchKey, $searchValue);
-		$sqlOp->close();
-		return $result;
-	}
-
-//Private Method
-
-	private static function selectProjectWithSearchKeyAndValue($key, $value) {
-		$sqlOp = new SqlOp();
-		$sqlOp->connectTo();
-		$result = $sqlOp->selectItem("Project", $key, $value);
-		$sqlOp->close();
-		return $result;
+	public function deleteObject() {
+		$this->SqlOp->connectTo();
+		$result = $this->SqlOp->deleteItem('Project', 'id', $this->id);
+		$this->SqlOp->close();
+		return $result;	
 	}
 	
-	private static function deleteProject($key, $value) {
-		$sqlOp = new SqlOp();
-		$sqlOp->connectTo();
-		$result = $sqlOp->deleteItem("Project", $key, $value);	
-		$sqlOp->close();
-		return $result;
+	private static function createObjectWith($id, $projectname, $adminid, $createrid, $description, $createdate, $groupid) {
+		$object = new Project();
+		$object->id = $id;
+		$object->projectname = $projectname;
+		$object->adminid = $adminid;
+		$object->createrid = $createrid;
+		$object->description = $description;
+		$object->createdate = $createdate;
+		$object->groupid = $groupid;
+		return $object;
 	}
-
 }	
 ?>
