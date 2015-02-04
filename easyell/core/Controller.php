@@ -14,7 +14,6 @@ class Controller{
 	public function __construct(){
 	}
 	public function get_filename($path){
-		echo "[path:".$path."]";
 		$extension_len = 4;
 		$path_len = strlen($path);
 
