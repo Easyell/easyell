@@ -19,7 +19,7 @@ class Controller{
 			if(!isset($GLOBALS['SqlOp'])){
 				global $SqlOp;
 				$this->load($this->dbOpPath);
-//				$GLOBALS['SqlOp'] = $this->SqlOp;
+				$SqlOp = $this->SqlOp;
 			}
 		}
 	}
@@ -38,8 +38,6 @@ class Controller{
 	 */
 	public function load($model_path,$other_handle = NULL){
 		$model_path = $this->model_dir.$model_path;
-		
-		var_dump($model_path);
 
 		if(!file_exists($model_path)){
 			exit('controller load model ['.$model_path.']  does not exist');
@@ -47,7 +45,7 @@ class Controller{
 
 		$model_name = $this->get_filename($model_path);
 		if($model_name){
-			if( $this->loaded_model_cache[$model_name]){
+			if( isset($this->loaded_model_cache[$model_name]) ){
 				return;
 			}
 		}else{
@@ -65,6 +63,22 @@ class Controller{
 				$this->$model_name = $model_instance;
 		}
 		$this->loaded_model_cache[$model_name] = $model_instance;
+	}
+	/*
+	 * 全局的SqlOp连接 
+	 * 
+	 */
+	public function close(){
+		if(property_exists($this,$this->dbObjName)){
+			$propName = $this->dbObjName;
+			$this->$propName->close();
+		}else if (property_exists($this,strtolower($this->dbObjName))){
+			$propName = strtolower($this->dbObjName);
+			$this->$propName->close();
+		}else{
+			return NULL;
+		}
+		return TRUE;
 	}
 }
 
