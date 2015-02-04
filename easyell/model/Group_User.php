@@ -5,7 +5,7 @@ class Group_User extends model{
 	public $userid;
 	public $projectid;
 	public function __construct() {
-		$this->load('db/SqlOp.php')
+		$this->load('db/SqlOp.php');
 		$this->SqlOp->connectTo();
 	}
 	

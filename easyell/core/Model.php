@@ -8,19 +8,9 @@ class Model{
 	
 	private $loaded_model_cache = array();
 	
-	private $dbOpPath  = 'tools/SqlOp.php';
-	private $dbObjName = 'SqlOp';
 	
-	
-	public function __construct($isSql = FALSE){
-		if($isSql){
-			$sqlop = $GLOBALS['SqlOp'];
-			if(!isset($sqlop)){
-				global $SqlOp;
-				$this->load($this->dbOpPath);
-				$SqlOp =& $this->SqlOp;
-			}
-		}
+	public function __construct(){
+
 	}
 	
 	public function get_filename($path){

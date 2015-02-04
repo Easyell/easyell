@@ -59,11 +59,11 @@ class Output extends Model{
 
 		//jsonp
 		if($callback){
-			header("Content-type: text/html");
+//			header("Content-type: text/html");
 			echo $callback.'('.$returnJson.');';
 		//json
 		}else{
-			header("Content-type: application/json");
+//			header("Content-type: application/json");
 			echo $returnJson;			
 		}
 		

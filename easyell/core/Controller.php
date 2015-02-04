@@ -11,7 +11,17 @@ class Controller{
 	
 	private $loaded_model_cache = array();
 	
-	public function __construct(){
+	private $dbOpPath  = 'tools/SqlOp.php';
+	private $dbObjName = 'SqlOp';
+	
+	public function __construct($isSql = FALSE){
+		if($isSql){
+			if(!isset($GLOBALS['SqlOp'])){
+				global $SqlOp;
+				$this->load($this->dbOpPath);
+//				$GLOBALS['SqlOp'] = $this->SqlOp;
+			}
+		}
 	}
 	public function get_filename($path){
 		$extension_len = 4;
@@ -28,6 +38,8 @@ class Controller{
 	 */
 	public function load($model_path,$other_handle = NULL){
 		$model_path = $this->model_dir.$model_path;
+		
+		var_dump($model_path);
 
 		if(!file_exists($model_path)){
 			exit('controller load model ['.$model_path.']  does not exist');
