@@ -57,27 +57,22 @@ class A extends Controller{
 	   	**/
 ///////////////////////////////////////////////////
 		$this->load('Project.php');
+		/**
 		$sqlOp = new SqlOp();
 		$sqlOp->connectTo();
 		$array = Project::all($sqlOp);
 		//$array = Project::selectObjectWithId(1, $sqlOp);
 		echo json_encode($array[0]->id);
 		$sqlOp->close();
-/////////////////////////////////////////////////////////
-		/**
-		$this->load('User.php');
-		$this->testBoolValue(User::insertUser(6, 'guoshencheng1', 'guoshencheng1','123456', 'afadagagre', 'andna@akak.com', '959595919191'));
-		//$this->testBoolValue(User::deleteUserWithId(6));
-		//$this->testBoolValue(User::deleteUserWithUsername('guoshencheng1'));
-		$this->testBoolValue(User::deleteUserWithAccount('guoshencheng1'));
-		//$keys = array('username', 'password');
-		//$values = array('guoshencheng2', '234567');
-		//$this->testBoolValue(User::updateUser($keys, $values, 'id', 6));
-		//User::deleteModel();
-		echo json_encode(User::selectUserWithId(6));
-		//echo json_encode(User::selectUserWithAcount('guoshencheng'));
-		//echo json_encode(User::selectUserWithUsername('guoshencheng'));
 		**/
+/////////////////////////////////////////////////////////
+		$this->load('User.php');
+		
+		$sqlOp = new SqlOp();
+		$sqlOp->connectTo();
+		$array = User::all($sqlOp);
+		echo json_encode($array[0]->id);
+		$sqlOp->close();
 	}
 
 	private function testBoolValue($bool) {
