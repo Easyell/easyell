@@ -10,12 +10,12 @@ class Route extends Model {
 
 	public function __construct() {
 		//controller编号
-		$this->fn = $_GET['fn'];
-		$this->fn = intval($this->fn);
-		//随身参数
-		$this->param = $_GET['param'];
-		
-		if(!($this->fn && $this->param)){
+		if(isset($_GET['fn']) && isset($_GET['param'])){
+			$this->fn = $_GET['fn'];
+			$this->fn = intval($this->fn);
+			//随身参数
+			$this->param = $_GET['param'];
+		}else{
 			exit('must have fn and param');
 		}
 	}
@@ -42,7 +42,7 @@ class Route extends Model {
 		}
 		
 		$result = $route_controller_obj->set_param($this->param);
-		
+
 		$this->load('io/output.php');
 		$this->output->json($result);
 	}

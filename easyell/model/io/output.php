@@ -37,16 +37,16 @@ class Output extends Model{
 			
 			$returnJson = json_encode($paramArr);
 			
-			$callback = $_GET[$this->callbackNamel];
+			$callback = isset($_GET[$this->callbackName])?$_GET[$this->callbackName]:null;
 			if(!$callback){
-				$callback = $_POST[$this->callbackName];
+				$callback = isset($_POST[$this->callbackName])?$_POST[$this->callbackName]:null;
 			}
 			
 		}else if(isset($paramArr)){
 				
-			$callback = $_GET[$this->callbackNamel];
+			$callback = isset($_GET[$this->callbackName])?$_GET[$this->callbackName]:null;
 			if(!$callback){
-				$callback = $_POST[$this->callbackName];
+				$callback = isset($_POST[$this->callbackName])?$_POST[$this->callbackName]:null;
 			}
 			
 			$paramArr = array($paramArr);

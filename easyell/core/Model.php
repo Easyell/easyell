@@ -14,7 +14,7 @@ class Model{
 	
 	public function __construct($isSql = FALSE){
 		if($isSql){
-			$sqlop = $GLOBALS['sqlop'];
+			$sqlop = $GLOBALS['SqlOp'];
 			if(!isset($sqlop)){
 				global $SqlOp;
 				$this->load($this->dbOpPath);
@@ -44,9 +44,8 @@ class Model{
 		}
 
 		$model_name = $this->get_filename($model_path);
-
 		if($model_name){
-			if( $this->loaded_model_cache[$model_name]){
+			if( isset($this->loaded_model_cache[$model_name])){
 				return;
 			}
 		}else{
