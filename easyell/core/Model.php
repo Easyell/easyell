@@ -8,19 +8,8 @@ class Model{
 	
 	private $loaded_model_cache = array();
 	
-	private $dbOpPath  = 'tools/SqlOp.php';
-	private $dbObjName = 'SqlOp';
 	
-	
-	public function __construct($isSql = FALSE){
-		if($isSql){
-			$sqlop = $GLOBALS['SqlOp'];
-			if(!isset($sqlop)){
-				global $SqlOp;
-				$this->load($this->dbOpPath);
-				$SqlOp =& $this->SqlOp;
-			}
-		}
+	public function __construct(){
 	}
 	
 	public function get_filename($path){
@@ -63,21 +52,6 @@ class Model{
 			$this->$model_name = $model_instance;
 		}
 		$this->loaded_model_cache[$model_name] = $model_instance;
-	}
-	/*
-	 * 关闭数据库的连接
-	 */
-	public function close(){
-		if(property_exists($this,$this->dbObjName)){
-			$propName = $this->dbObjName;
-			$this->$propName->close();
-		}else if (property_exists($this,strtolower($this->dbObjName))){
-			$propName = strtolower($this->dbObjName);
-			$this->$propName->close();
-		}else{
-			return NULL;
-		}
-		return TRUE;
 	}
 }
 

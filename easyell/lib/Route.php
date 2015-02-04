@@ -31,7 +31,11 @@ class Route extends Model {
 		$class_name = $this->Tools->get_php_filename($controller);
 
 		include_once $this->controller_dir.$controller;
-		$route_controller_obj = new $class_name();
+		if($this->fn>2000){
+			$route_controller_obj = new $class_name(TRUE);
+		}else{
+			$route_controller_obj = new $class_name();
+		}
 
 		//验证继承 和 是否带有set_param方法
 		if (!$route_controller_obj instanceof $this->controller_parent) {
