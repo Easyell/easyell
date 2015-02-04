@@ -16,16 +16,16 @@ class User extends Model {
 		$array = $sqlOp->selectItem('User', 'id', $id);
 		$objectArray = array();
 		for ($i = 0; $i < count($array); $i ++) {
-			array_push($objectArray, self createObjectWith($array[$i]['id'],$array[$i]['account'], $array[$i]['username'], $array[$i]['password'], $array[$i]['avatar'], $array[$i]['email'], $array[$i]['phone']));
+			array_push($objectArray, self::createObjectWith($array[$i]['id'],$array[$i]['account'], $array[$i]['username'], $array[$i]['password'], $array[$i]['avatar'], $array[$i]['email'], $array[$i]['phone']));
 		}
 		return $objectArray;
 	}
 
 	public static function all(&$sqlOp) {
-		$array = $sqlOp->selectItem('User');
+		$array = $sqlOp->selectAll('User');
 		$objectArray = array();
 		for ($i = 0; $i < count($array); $i ++) {
-			array_push($objectArray, self createObjectWith($array[$i]['id'],$array[$i]['account'], $array[$i]['username'], $array[$i]['password'], $array[$i]['avatar'], $array[$i]['email'], $array[$i]['phone']));
+			array_push($objectArray, self::createObjectWith($array[$i]['id'],$array[$i]['account'], $array[$i]['username'], $array[$i]['password'], $array[$i]['avatar'], $array[$i]['email'], $array[$i]['phone']));
 		}
 		return $objectArray;
 	}
@@ -39,7 +39,7 @@ class User extends Model {
 			return $result;
 		} else {
 			$keys = array('account', 'username', 'password', 'avatar', 'email', 'phone');
-			$values = array$this->account, $this->username, $this->password, $this->avatar, $this->email, $this->phone);
+			$values = array($this->account, $this->username, $this->password, $this->avatar, $this->email, $this->phone);
 			$result = $this->SqlOp->updateItem('User', $keys, $values, 'id', $this->id);
 			$this->SqlOp->close();
 			return $result;
