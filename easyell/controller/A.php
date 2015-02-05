@@ -74,9 +74,17 @@ class A extends Controller{
 		$this->testBoolValue($array[0]->saveObject());
 	**/
   /////////////////////////////////////
-  		$this->load('Group.php');
-		$array = Group::all();
+	/**  	
+ 		$this->load('Group.php');
+		//$array = Group::all();
+		$array = Group::selectObjectWithId(1);
+		$object = $array[0];
+		$object->id = 2;
+		$this->testBoolValue($object->saveObject());
+		$array = Group::selectObjectWithId(2);
 		var_dump($array[0]);
+		**/
+	/////////////////////////////
    		global $SqlOp;
 		$SqlOp->close();
 	}
