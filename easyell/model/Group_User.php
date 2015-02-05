@@ -5,13 +5,12 @@ class Group_User extends model{
 	public $userid;
 	public $projectid;
 	public function __construct() {
-		$this->load('db/SqlOp.php');
-		$this->SqlOp->connectTo();
 	}
 	
 // PublicMethodi
-	public static function selectObjectWithId($id, &$sqlOp) {
-		$array = $sqlOp->selectItem('Group_User', 'id', $id);
+	public static function selectObjectWithId($id) {
+		global $SqlOp;
+		$array = $SqlOp->selectItem('Group_User', 'id', $id);
 		$objectArray = array();
 		for ($i = 0; $i < count($array); $i ++) {
 			array_push($objectArray,  self::createObjectWith($array[$i]['id'], $array[$i]['groupid'], $array[$i]['userid'], $array[$i]['projectid']));
@@ -19,7 +18,7 @@ class Group_User extends model{
 		return $objectArray;
 	}
 	
-	public static function all(&$sqlOp) {
+	public static function all() {
 		$array = self::selectAll($sqlOp);
 		$objectArray = array();
 		for ($i = 0; $i < count($array); $i ++) {
@@ -28,8 +27,9 @@ class Group_User extends model{
 		return $objectArray;
 	}
 
-	public static function selectAll(&$sqlOp) {
-		$result = $sqlOp->selectAll('Group_User');
+	public static function selectAll() {
+		global $SqlOp;
+		$result = $SqlOp->selectAll('Group_User');
 		return $result;
 	}
 
@@ -43,24 +43,20 @@ class Group_User extends model{
 	}
 
 	public function deleteObject() {
-		$this->SqlOp->connectTo();
-		$result = $this->SqlOp->deleteItem('Group_User', 'id', $this->id);
-		$this->SqlOp->close();
-		return $result;
+		global $SqlOp;
+		return $SqlOp->deleteItem('Group_User', 'id', $this->id);
 	}
 
 	public function saveObject() {
-		$this->SqlOp->connectTo();
+		global $SqlOp;
 		$values = array($this->id, $this->groupid, $this->userid, $this->projectid);
-		$result = $this->SqlOp->insertTo('Group_User', $values);
+		$result = $SqlOp->insertTo('Group_User', $values);
 		if($result) {
-			$this->SqlOp->close();
 			return $result;
 		} else {
 			$keys = array('groupid', 'userid', 'projectid');
 			$values = array($this->groupid, $this->userid, $this->projectid);
-			$result = $this->SqlOp->updateItem('Group_User', $keys, $values, 'id', $this->id);
-			$this->SqlOp->close();
+			$result = $SqlOp->updateItem('Group_User', $keys, $values, 'id', $this->id);
 			return $result;
 		}
 	}
