@@ -10,14 +10,14 @@ class Route extends Model {
 
 	public function __construct() {
 		//controller编号
-		if(isset($_GET['fn']) && isset($_GET['param'])){
+	//	if(isset($_GET['fn']) && isset($_GET['param'])){
 			$this->fn = $_GET['fn'];
 			$this->fn = intval($this->fn);
 			//随身参数
 			$this->param = $_GET['param'];
-		}else{
-			exit('must have fn and param');
-		}
+	//	}else{
+	//		exit('must have fn and param');
+	//	}
 	}
 	public function init($fn_map) {
 		$this->load('tools/Tools.php');
@@ -31,7 +31,7 @@ class Route extends Model {
 		$class_name = $this->Tools->get_php_filename($controller);
 
 		include_once $this->controller_dir.$controller;
-		if($this->fn>2000){
+		if($this->fn<2000){
 			$route_controller_obj = new $class_name(TRUE);
 		}else{
 			$route_controller_obj = new $class_name();

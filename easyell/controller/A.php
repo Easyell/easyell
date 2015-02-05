@@ -73,6 +73,10 @@ class A extends Controller{
 		var_dump($array[0]);
 		$this->testBoolValue($array[0]->saveObject());
 	**/
+  /////////////////////////////////////
+  		$this->load('Group.php');
+		$array = Group::all();
+		var_dump($array[0]);
    		global $SqlOp;
 		$SqlOp->close();
 	}
