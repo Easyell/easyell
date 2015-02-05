@@ -15,6 +15,8 @@ class SqlOp extends Model{
 		$this->adress = "127.0.0.1".$this->port;
 		$this->account = "root";
 		$this->password = 123456;
+		
+		$this->connectTo();
 	}
 	public function setProperty($_ad,$_ac,$_ps,$_dbName){
 		$this->adress = $_ad.$this->port;

@@ -11,7 +11,7 @@ class Controller{
 	
 	private $loaded_model_cache = array();
 	
-	private $dbOpPath  = 'tools/SqlOp.php';
+	private $dbOpPath  = 'db/SqlOp.php';
 	private $dbObjName = 'SqlOp';
 	
 	public function __construct($isSql = FALSE){
