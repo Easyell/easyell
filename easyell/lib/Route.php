@@ -10,7 +10,7 @@ class Route extends Model {
 
 	public function __construct() {
 		//controller编号
-	if(isset($_GET['fn']) && isset($_GET['param'])){
+		if(isset($_GET['fn']) && isset($_GET['param'])){
 			$this->fn = $_GET['fn'];
 			$this->fn = intval($this->fn);
 			//随身参数
