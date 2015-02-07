@@ -55,7 +55,14 @@ class Route extends Model {
 		$result = $route_controller_obj->set_param($this->param);
 
 		$this->load('io/output.php');
-		$this->output->json($result);
+		//如果是数组返回
+		if(isset($result['result'])){
+			$this->output->json($result['data']);
+		}else{
+			$this->output->json(array(
+				'result' => $result
+			));
+		}
 	}
 }
 ?>

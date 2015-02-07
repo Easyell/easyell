@@ -55,7 +55,7 @@ class Controller{
 		$model_instance = new $model_name();
 		//验证 model的继承
 		if(!$model_instance instanceof Model){
-			exit('load '.$model_path.' no exntend');
+			exit('load '.$model_path.' doest not exntend to Model');
 		}	
 		if($other_handle){
 			$this->$other_handle = $model_instance;
