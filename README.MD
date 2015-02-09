@@ -7,11 +7,11 @@
 所有的请求的链接都应该都是这样组成的
 
 ```
-    http://域名/index.php?fn=数字&param=json参数
+http://域名/index.php?fn=数字&param=json参数
 ```
 或
 ```
-    http://域名/?fn=数字&param=json参数
+http://域名/?fn=数字&param=json参数
 ```
 
 数字在config文件下的fn_map.php自定义添加
