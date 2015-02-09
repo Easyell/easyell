@@ -7,11 +7,11 @@
 所有的请求的链接都应该都是这样组成的
 
 ```
-http://域名/index.php?fn=数字&param=json参数
+    http://域名/index.php?fn=数字&param=json参数
 ```
 或
 ```
-http://域名/?fn=数字&param=json参数
+    http://域名/?fn=数字&param=json参数
 ```
 
 数字在config文件下的fn_map.php自定义添加
@@ -33,10 +33,10 @@ http://域名/?fn=数字&param=json参数
 
 class My_controller extends Controller{
 
-public function set_param($param){
+    public function set_param($param){
 
-//something here
-}
+     //something here
+    }
 }
 ```
 
@@ -53,12 +53,12 @@ Model同理，只是存放地方不一样，Model们应该在Model文件夹下�
 //使用model/tools/m.php的方法
 public A extends Controller{
 
-public set_param(){
-//只要tools/m.php就行,而不是model/tools/m.php
-$this->load('tools/m.php');
-//does就是m.php中的方法
-$this->m->does();
-}
+    public set_param(){
+    //只要tools/m.php就行,而不是model/tools/m.php
+    $this->load('tools/m.php');
+    //does就是m.php中的方法
+    $this->m->does();
+    }
 }
 
 ```
