@@ -14,16 +14,22 @@ class User extends Model {
 	public static function selectObjectWithId($id) {
 		global $SqlOp;
 		$array = $SqlOp->selectItem('User', 'id', $id);
-		$objectArray = array();
-		for ($i = 0; $i < count($array); $i ++) {
-			array_push($objectArray, self::createObjectWith($array[$i]['id'],$array[$i]['account'], $array[$i]['username'], $array[$i]['password'], $array[$i]['avatar'], $array[$i]['email'], $array[$i]['phone']));
-		}
-		return $objectArray;
+		return self::getObjectArray($array);		
+	}
+
+	public static function selectObjectWithAccount($account) {
+		global $SqlOp;
+		$array = $SqlOp->selectItem('User', 'account', $account);
+		return self::getObjectArray($array);
 	}
 
 	public static function all() {
 		global $SqlOp;
 		$array = $SqlOp->selectAll('User');
+		return self::getObjectArray($array);		
+	}
+	
+	private static function getObjectArray($array) {
 		$objectArray = array();
 		for ($i = 0; $i < count($array); $i ++) {
 			array_push($objectArray, self::createObjectWith($array[$i]['id'],$array[$i]['account'], $array[$i]['username'], $array[$i]['password'], $array[$i]['avatar'], $array[$i]['email'], $array[$i]['phone']));

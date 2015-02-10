@@ -80,6 +80,10 @@ class Controller{
 		}
 		return TRUE;
 	}
+
+	public function getDecodeObject($paramString) {
+		return json_decode($paramString, true);
+	}
 }
 
 ?>
