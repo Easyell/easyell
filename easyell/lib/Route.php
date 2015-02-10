@@ -26,7 +26,24 @@ class Route extends Model {
 			exit('must have fn and param');
 		}
 	}
+	/*
+	 * 参数处理 
+	 * 
+	 * 统一至Array形式
+	 */
+	public function param_handle(){
+		$param = $this->param;		
+
+		if(is_string($param)){
+			$param = json_decode($param);
+			$param = get_object_vars($param);
+		}
+		
+		$this->param = $param;
+	}
 	public function init($fn_map) {
+		$this->param_handle();
+
 		$this->load('tools/Tools.php');
 		
 		$controller = $fn_map[$this->fn];
