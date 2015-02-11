@@ -74,9 +74,15 @@ class Uploader extends Model{
 	}
 	/*
 	 * 文件上传设置初始化
-	 * 
 	 * 初始化相关参数
 	 * 
+	 * $config=array(
+	 *   field
+	 *   filePath
+	 *   filename
+	 *   isOverwrite
+	 * )
+	 *  
 	 */
 	public function upload($config){
 		$result = TRUE;
@@ -112,9 +118,35 @@ class Uploader extends Model{
 	 * 根据config动作
 	 */
 	public function do_upload($config){
-
+		
 		if(!isset($_FILES[$config['field']])){
 			return 'config hasnt field';
+		}
+		if(!$this->validate_upload_path($config)){
+			return 'config has invalidate path';
+		}
+		
+		$file = $_FILES[$config['field']];
+		
+		if(! is_uploaded_file($file['tmp_name'])){
+			
+		}
+	}
+	/*----------------------一系列验证函数---------------------------*/
+	
+	/*
+	 * 验证路径，是否是已经存在文件夹
+	 * 
+	 */
+	public function validate_upload_path($config){
+		
+		$path = $config[$this->filePathName];
+
+		$isExists = file_exists($path);
+		if($isExists){
+			return is_dir($path);
+		}else{
+			return FALSE;
 		}
 	}
 }

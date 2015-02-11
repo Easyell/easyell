@@ -35,10 +35,11 @@ class Route extends Model {
 		$param = $this->param;		
 
 		if(is_string($param)){
-			$param = json_decode($param);
-			$param = get_object_vars($param);
+			$paramObj = json_decode($param);
+			if(is_object($paramObj)){
+				$param = get_object_vars($paramObj);
+			}
 		}
-		
 		$this->param = $param;
 	}
 	public function init($fn_map) {
