@@ -2,6 +2,8 @@
 /*
  * 文件上传相关的处理
  * 处理上传的文件，并返回有用的信息
+ * 
+ * @author jyouger
  *  
  */
 class Uploader extends Model{

@@ -1,6 +1,11 @@
 <?php
 /*
  * 在 index.php 中
+ * 
+ * 路由
+ * 
+ * @author jyouger
+ * 
  */
 class Route extends Model {
 

@@ -1,5 +1,10 @@
 <?php
-
+/*
+ * 测试上传
+ * 
+ * @author jyouger
+ * 
+ */
 class TestUp extends Controller{
 	
 	function __construct(){

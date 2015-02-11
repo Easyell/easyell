@@ -2,6 +2,10 @@
 /*
  * 在 core/route.php 中
  * 
+ * 控制器
+ * 
+ * @author jyouger
+ * 
  */
 class Controller extends C{
 	

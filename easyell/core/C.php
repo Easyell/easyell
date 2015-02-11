@@ -1,5 +1,12 @@
 <?php
 
+/*
+ * model和controller的顶级类
+ * 
+ * @author jyouger
+ * 
+ */
+
 class C {
 
 	private $model_dir = 'model/';
