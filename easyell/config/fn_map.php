@@ -8,7 +8,8 @@ $fn_map = array(
 //也可以这种形式绑定
 $fn_map[2002]  = 'B.php';
 $fn_map[3000] = 'LoginController.php';
-
+$fn_map[3001] = 'ModifyProfileController.php';
+$fn_map[3002] = 'UpdatePasswordController.php';
 
 return $fn_map;
 ?>
