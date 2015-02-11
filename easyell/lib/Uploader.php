@@ -60,6 +60,7 @@ class Uploader extends Model{
 	 * 错误信息
 	 */
 	private $erorMsg = '';
+	private $data = null;
 	
 	public function __construct(){
 		$this->configPro = array(
@@ -155,10 +156,23 @@ class Uploader extends Model{
 			$data = 'move upload file fail';
 		}
 		
+		$this->data = $config;
+		
 		return array(
 			'result' => $result,
 			'data'   => $data
 		);
+	}
+	public function data(){
+		/*
+		return array(
+			'fileName' => $this->data[$this->filenameName],
+			'originName' => $this->data[$this->originNameName],
+			'path' => $this->data['path'],
+		);
+		 * 
+		 */
+		return $this->data;
 	}
 	/*----------------------一系列验证函数---------------------------*/
 	
