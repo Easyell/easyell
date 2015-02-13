@@ -61,7 +61,11 @@ class SqlOp extends Model{
 		$sqlStringPrefix = "insert into ".$tableName." values";
 		$valueString = "";
 		for ($i = 0; $i < count($values); $i++ ) {
-			$valueString = $valueString.("'".$values[$i]."'");  
+			if($values[$i] == '') {
+				$valueString = $valueString.'null'; 
+			} else {
+				$valueString = $valueString.("'".$values[$i]."'"); 
+			}
 			if ($i != count($values) - 1) {
 				$valueString = $valueString.",";
 			}
