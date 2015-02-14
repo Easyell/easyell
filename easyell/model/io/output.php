@@ -2,9 +2,9 @@
 /*
  * 输出类，
  * 
- * json：Fn，以json格式返回
+ * @author jyouger
  * 
- * jsonp：Fn，以jsonp格式返回
+ * json：Fn，以json格式返回
  * 
  */
 class Output extends Model{

@@ -1,6 +1,11 @@
 <?php
 /*
  * 在 index.php 中
+ * 
+ * 路由
+ * 
+ * @author jyouger
+ * 
  */
 class Route extends Model {
 
@@ -10,18 +15,43 @@ class Route extends Model {
 
 	public function __construct() {
 		//controller编号
-	$testfn = $_GET['fn'];
-	$testparam = $_GET['param'];
-	if(isset($_GET['fn']) && isset($_GET['param'])){
+		$testfn = $_GET['fn'];
+		$testparam = $_GET['param'];
+		if(isset($_GET['fn']) && isset($_GET['param'])){
 			$this->fn = $_GET['fn'];
 			$this->fn = intval($this->fn);
 			//随身参数
 			$this->param = $_GET['param'];
+			
+		}else if(isset($_POST['fn']) && isset($_POST['param'])){
+			$this->fn = $_POST['fn'];
+			$this->fn = intval($this->fn);
+			//随身参数
+			$this->param = $_POST['param'];
+			
 		}else{
 			exit('must have fn and param');
 		}
 	}
+	/*
+	 * 参数处理 
+	 * 
+	 * 统一至Array形式
+	 */
+	public function param_handle(){
+		$param = $this->param;		
+
+		if(is_string($param)){
+			$paramObj = json_decode($param);
+			if(is_object($paramObj)){
+				$param = get_object_vars($paramObj);
+			}
+		}
+		$this->param = $param;
+	}
 	public function init($fn_map) {
+		$this->param_handle();
+
 		$this->load('tools/Tools.php');
 		
 		$controller = $fn_map[$this->fn];
@@ -50,7 +80,14 @@ class Route extends Model {
 		$result = $route_controller_obj->set_param($this->param);
 
 		$this->load('io/output.php');
-		$this->output->json($result);
+		//如果是数组返回
+		if(isset($result['result'])){
+			$this->output->json($result['data']);
+		}else{
+			$this->output->json(array(
+				'result' => $result
+			));
+		}
 	}
 }
 ?>
