@@ -4,7 +4,7 @@ class A extends Controller{
 
 	private $name = 'A';
 	
-	public function __constructr(){
+	public function __constructr($isSql = FALSE){
 		parent::__construct($isSql);
 	}
 
