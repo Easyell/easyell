@@ -7,8 +7,7 @@ class LoginController extends Controller {
 	public function __constructr() {
 		parent::__construct($isSql);
 	}
-	public function set_param($paramString) {
-		$param = json_decode($paramString, true);
+	public function set_param($param) {
 		$account = $param['account'];
 		$password = $param['password'];
 		$this->load('User.php');

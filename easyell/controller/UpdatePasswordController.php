@@ -7,10 +7,9 @@ class UpdatePasswordController extends Controller {
 		parent::__construct($isSql);
 	}
 	
-	public function set_param($paramString) {
-		$param = $this->getDecodeObject($paramString);
+	public function set_param($param) {
 		$this->load('User.php');
-		$user = User::selectObjectWithId($param['id'])[0];
+		$user = User::selectObjectWithAccount($param['account'])[0];
 		$user->password = $param['password'];
 		if($user->saveObject()) {
 			echo 'success';

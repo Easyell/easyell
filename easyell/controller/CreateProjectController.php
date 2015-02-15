@@ -7,8 +7,7 @@ class CreateProjectController extends Controller {
 		parent::__construct($isSql);
 	}	
 	//{"projectname":"testproject","groupid":"1","adminid":"1","createrid":"1"}
-	public function set_param($paramString) {
-		$param = $this->getDecodeObject($paramString);
+	public function set_param($param) {
 		$this->load('Project.php');
 		$project = new Project();
 		$project->projectname = $param['projectname'];

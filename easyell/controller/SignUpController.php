@@ -7,8 +7,7 @@ class SignUpController extends Controller {
 		parent::__construct($isSql);
 	}
 
-	public function set_param($paramString) {
-		$param = $this->getDecodeObject($paramString);
+	public function set_param($param) {
 		$this->load('User.php');
 		$user = new User();
 		$user->account = $param['account'];

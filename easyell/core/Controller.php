@@ -37,10 +37,6 @@ class Controller extends C{
 		}
 		return TRUE;
 	}
-
-	public function getDecodeObject($paramString) {
-		return json_decode($paramString, true);
-	}
 }
 
 ?>
