@@ -1,4 +1,7 @@
 <?php
+/**
+ * create by guoshencheng 2015.2
+ **/
 class SignUpController extends Controller {
 	public function __constructr() {
 		parent::__construct($isSql);

@@ -1,4 +1,7 @@
 <?php
+/**
+ * create by guoshencheng 2015
+ **/
 class Project extends Model {
 	public $id;
 	public $projectname;

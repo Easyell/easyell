@@ -1,4 +1,7 @@
 <?php
+/**
+ * create by guoshencheng 2015
+ **/
 class Group_User extends model{	
 	public $id;
    	public $groupid;

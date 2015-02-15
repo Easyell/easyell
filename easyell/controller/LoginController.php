@@ -1,4 +1,7 @@
-<?php
+<?php 
+/**
+ * create by guoshencheng 2015
+ **/
 class LoginController extends Controller {
 	private $name = 'LoginController';
 	public function __constructr() {

@@ -1,6 +1,6 @@
 <?php
 /**
- * create by guoshencheng 2015.2.13
+ * create by guoshencheng 2015.2
  **/
 class CreateProjectController extends Controller {
 	public function __constructr() {

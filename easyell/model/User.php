@@ -1,4 +1,7 @@
 <?php
+/**
+ * create by guoshencheng 2015
+ **/
 class User extends Model {
 	public $id;
 	public $account;

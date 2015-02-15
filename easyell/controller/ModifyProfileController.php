@@ -1,10 +1,13 @@
 <?php
+/**
+ * create by guoshencheng 2015.2
+ **/
 class ModifyProfileController extends controller {
 	public function __constructr() {
 		parent::__construct($isSql);
 	}	
 	
-	public set_param($paramString) {
+	public function set_param($paramString) {
 		$param = $this->getDecodeObject($paramString);	
 		$this->load('User.php');
 		$user = User::selectObjectWithId($param['id']);
