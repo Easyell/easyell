@@ -4,80 +4,67 @@
 	@description item and user mapping
 	@author Leo Zhou
 	@createtime 2015/1/29
-	@updatetime 2014/1/29
+	@updatetime 2014/2/18
 
 
 **/
 
 class Item_User extends model{
+	//params
+	public $id;
+	public $itemId;
+	public $userId;
+
 	public function __construct() {
-		$this->load('tools/SqlOp.php');
 	}
 
 	//PublicMethod
-
-	//Select
-	public function selectItem_UserWithId($id){
-		$this->selectItem_UserWithKeyAndValue("id",$id);
+	public static function selectObjectWithId($id){
+		global $SqlOp;
+		$array = $SqlOp->selectItem('Item_User','id',$id);
+		return self:changeToObjectArray($array);
 	}
 
-	public function selectItem_UserWithUserId($userId){
-		$this->selectItem_UserWithKeyAndValue("ownerid",$userId);
+	//selectAll
+
+	//Delet
+	public function deleteObject(){
+		globals $SqlOp;
+		return $SqlOp->deleteItem('Item_User','id',$this->id);
 	}
 
-	public function selectIte_UserWithItemId($itemId) {
-		$this->selectItem_UserWithKeyAndValue("itemid",$itemId);
+	//Save 
+	public function saveObject(){
+		global $SqlOp;
+		$values = array($this->id,$this->itemId,$this->userId);
+		$result = $SqlOp->insertTo('Item_User',$values);
+		if($result){
+			return $result;
+		} else {
+			$keys = array('itemId','userId');
+			$values = array($this->itemId,$this->userId);
+			$result = $SqlOp->updateItem('Item_User',$keys,$values,'id',$this->id);
+			return $result;
+		}
 	}
 
-	//Delete 
-
-	public function deleteItem_UserWithId($id){
-		$this->deleteItem_UserWithKeyAndValue("id",$id);
+	//private 
+	private static function createObjectWith($id,$itemId,$userId){
+		$object = new Item_User();
+		$object->id = $id;
+		$object->itemId = $itemId;
+		$object->userId = $userId;
+		return $object;
 	}
 
-	public function deleteItem_UserWithUserId($userId){
-		$this->deleteItem_UserWithKeyAndValue("ownerid",$userId);
+	private static function changeToObjectArray($array) {
+		$objectArray = array();
+		for ($i = 0; $i < count($array); $i ++) {
+			array_push($objectArray,  self::createObjectWith($array[$i]['id'], $array[$i]['groupname'], $array[$i]['updatetime'], $array[$i]['adminid'], $array[$i]['createrid'], $array[$i]['description']));
+		}
+		return $objectArray;
 	}
 
-	public function deleteIte_UserWithItemId($itemId) {
-		$this->deleteItem_UserWithKeyAndValue("itemid",$itemId);
-	}
-
-	//insert
-	public function inserItem_User($id, $itemId, $ownerId) {
-		$valueArray = array($id, $itemId, $ownerId);
-		$this->sqlop->connectTo();
-		$result = $this->sqlop->insertTo("Item_User", $valueArray);
-		$this->sqlop->close();
-		return $result;
-	}
-
-	//update
-	public function updateItem_User($setKeys,$setValues,$searchKey,$searchValue) {
-		$this->sqlop->connectTo();
-		$result = $this->sqlop->updateItem("Item_User", $setKeys,$setValues,$searchKey,$searchValue);
-		$this->sqlop->close();
-		return $result;
-	}
-
-
-	//privateMethod
-	private function selectItem_UserWithKeyAndValue($key, $value) {
-		$this->sqlop->connectTo();
-		$result = $this->sqlop->selectItem("Item_User", $key, $value);
-		$this->close();
-		return $result;
-	}
-
-	private function deleteItem_UserWithKeyAndValue($key, $value) {
-		$this->sqlop->connectTo();
-		$result = $this->sqlop->deleteItem("Item_User", $key, $value);
-		$this->close();
-		return $result;
-	}
+	
 }
-
-
-
-
 ?>
