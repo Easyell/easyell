@@ -14,5 +14,7 @@ $fn_map[3002] = 'UpdatePasswordController.php';
 $fn_map[3003] = 'SignUpController.php';
 $fn_map[3004] = 'CreateProjectController.php';
 
+$fn_map[3005] = 'CreateItemController.php';
+
 return $fn_map;
 ?>
