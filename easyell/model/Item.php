@@ -32,7 +32,7 @@ class Item extends Model {
 	public function deleteObject(){
 		global $SqlOp;
 		$result = $SqlOp->deleteItem('Item','id',$this->id)&&$SqlOp->deleteItem('Item_User','itemId',$this->id);
-		return ;
+		return $result;
 	}
 	//Save Or Update Object 
 	public function saveObject(){
@@ -67,12 +67,12 @@ class Item extends Model {
 	private static function changeToObjectArray($array) {
 		$objectArray = array();
 		for ($i = 0; $i < count($array); $i ++) {
-			array_push($objectArray,  self::createObjectWith($array[$i]['id'], $array[$i]['groupname'], $array[$i]['updatetime'], $array[$i]['adminid'], $array[$i]['createrid'], $array[$i]['description']));
+			array_push($objectArray,  self::createObjectWith($array[$i]['id'], $array[$i]['title'], $array[$i]['description'], $array[$i]['projectid'], $array[$i]['posterid'], $array[$i]['type'], $array[$i]['status'], $array[$i]['createdate'], $array[$i]['updatedate']));
 		}
 		return $objectArray;
 	}
 
-	private static function createObjectWith($id,$title,$description,$projectId,$posterId,$type,$status) {
+	private static function createObjectWith($id,$title,$description,$projectId,$posterId,$type,$status,$createDate,$updateDate) {
 		$object = new Item();
 		$object->id = $id;
 		$object->title = $title;
@@ -81,6 +81,10 @@ class Item extends Model {
 		$object->posterId = $posterId;
 		$object->status = $status;
 		$object->type = $type;
+		$object->createDate = $createDate;
+		$object->updateDate = $updateDate;
+
+
 		return $object;
 	}
 }

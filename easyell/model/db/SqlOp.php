@@ -6,7 +6,7 @@ class SqlOp extends Model{
 	private $password;
 	
 	private $db;
-	private $db_name = 'LightTracker';
+	private $db_name = 'LightTracker';//'easyell_zcj';
 
 	public $connect;
 	public $result;
@@ -26,21 +26,33 @@ class SqlOp extends Model{
 		return TRUE;
 	}
 	public function connectTo(){
-		$this->connect = mysql_connect($this->adress,$this->account,$this->password);
-		mysql_set_charset('utf8',$this->connect);
-		if($this->connect){
-			$this->db = mysql_select_db($this->db_name);
-			if($this->db){
+		// if(phpversion()=='5.5'){
+		// 	$this->connect = mysql_connect($this->adress,$this->account,$this->password);
+		// 	mysql_set_charset('utf8',$this->connect);
+		// 	if($this->connect){
+		// 		$this->db = mysql_select_db($this->db_name);
+		// 		if($this->db){
+		// 			return TRUE;
+		// 		}else{
+		// 			return FALSE;
+		// 		}
+		// 	}else{
+		// 		return FALSE;
+		// 	}
+		// }else{
+			$this->connect = mysqli_connect($this->adress,$this->account,$this->password,$this->db_name);
+			if($this->connect){
 				return TRUE;
 			}else{
 				return FALSE;
 			}
-		}else{
-			return FALSE;
-		}
+		// }
+		
 	}
 	private function queryTo($_str){
-		$this->result = mysql_query($_str,$this->connect);
+		var_dump($_str);
+		// $this->result = mysql_query($_str,$this->connect);
+		$this->result = mysqli_query($this->connect,$_str);
 		if($this->result!=FALSE){
 			return TRUE;
 		}else{
@@ -48,7 +60,8 @@ class SqlOp extends Model{
 		}
 	}
 	public function close(){
-		mysql_close($this->connect);
+		mysqli_close($this->connect);
+		// mysql_close($this->connect);
 	}
 	public function reset(){
 		$this->result = null;
@@ -102,7 +115,7 @@ class SqlOp extends Model{
 	public function selectItem($tableName, $searchKey, $searchValue){
 		$this->queryTo($this->getSelectSqlString($tableName, $searchKey, $searchValue));
 		$array = array();
-		while ($row = mysql_fetch_array($this->result, MYSQL_ASSOC)) {
+		while ($row = mysqli_fetch_array($this->result, MYSQL_ASSOC)) {
 			array_push($array, $row);
 		}
 		return $array;
@@ -115,7 +128,7 @@ class SqlOp extends Model{
 	public function selectAll($tableName) {
 		$this->queryTo("select * from ".$tableName);
 		$array = array();
-		while ($row = mysql_fetch_array($this->result, MYSQL_ASSOC)) {
+		while ($row = mysqli_fetch_array($this->result, MYSQL_ASSOC)) {
 			array_push($array, $row);
 		}
 		return $array;
