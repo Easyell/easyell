@@ -17,6 +17,14 @@ class Item_User extends model{
 
 	public function __construct() {
 	}
+	
+	public function toArray() {
+		return array(
+			"id" => $id;
+			"itemId" => $itemId;
+			"userId" => $userId;
+		);
+	}
 
 	//PublicMethod
 	public static function selectObjectWithId($id){

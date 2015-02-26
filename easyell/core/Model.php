@@ -11,6 +11,9 @@ class Model extends C{
 	
 	public function __construct(){
 	}
+
+	public function toArray() {
+	}
 }
 
 ?>

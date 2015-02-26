@@ -12,6 +12,17 @@ class Group extends model {
 	public function __construct() {
 	}
 	
+	public function toArray() {
+		return array(
+			"id" => $id;
+			"groupname" => $groupname;
+			"updatetime" => $updatetime;
+			"adminid" => $adminid;
+			"createrid" => $createrid;
+			"description" => $description;	
+		);	
+	}
+
 	public function deleteObject() {
 		global $SqlOp;
 		return $SqlOp->deleteItem("`Group`", 'id', $this->id);

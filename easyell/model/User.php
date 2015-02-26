@@ -13,6 +13,18 @@ class User extends Model {
 	
 	function __construct() {
 	}
+	
+	public function toArray() {
+		return array(
+			"id" => $id;
+			"account" => $account;
+			"username" => $username;
+			"password" => $password;
+			"avatar" => $avatar;
+			"email" => $email;
+			"phone" => $phone;	
+		);
+	}
 
 	public static function selectObjectWithId($id) {
 		global $SqlOp;

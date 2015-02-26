@@ -17,9 +17,9 @@ class CreateProjectController extends Controller {
 		$project->description = $param['description'];
 		$project->createdate = '10000101';
 		if ($project->saveObject()) {
-			echo 'success';
+			return 'success';
 		} else {
-			echo 'fail';
+			return 'fail';
 		}
 	}
 }
