@@ -14,12 +14,12 @@ class Group extends model {
 	
 	public function toArray() {
 		return array(
-			"id" => $id;
-			"groupname" => $groupname;
-			"updatetime" => $updatetime;
-			"adminid" => $adminid;
-			"createrid" => $createrid;
-			"description" => $description;	
+			"id" => $id,
+			"groupname" => $groupname,
+			"updatetime" => $updatetime,
+			"adminid" => $adminid,
+			"createrid" => $createrid,
+			"description" => $description	
 		);	
 	}
 

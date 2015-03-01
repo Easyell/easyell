@@ -20,9 +20,9 @@ class Item_User extends model{
 	
 	public function toArray() {
 		return array(
-			"id" => $id;
-			"itemId" => $itemId;
-			"userId" => $userId;
+			"id" => $id,
+			"itemId" => $itemId,
+			"userId" => $userId,
 		);
 	}
 
@@ -30,14 +30,14 @@ class Item_User extends model{
 	public static function selectObjectWithId($id){
 		global $SqlOp;
 		$array = $SqlOp->selectItem('Item_User','id',$id);
-		return self:changeToObjectArray($array);
+		return self::changeToObjectArray($array);
 	}
 
 	//selectAll
 
 	//Delet
 	public function deleteObject(){
-		globals $SqlOp;
+		global $SqlOp;
 		return $SqlOp->deleteItem('Item_User','id',$this->id);
 	}
 

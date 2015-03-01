@@ -16,13 +16,13 @@ class User extends Model {
 	
 	public function toArray() {
 		return array(
-			"id" => $id;
-			"account" => $account;
-			"username" => $username;
-			"password" => $password;
-			"avatar" => $avatar;
-			"email" => $email;
-			"phone" => $phone;	
+			"id" => $id,
+			"account" => $account,
+			"username" => $username,
+			"password" => $password,
+			"avatar" => $avatar,
+			"email" => $email,
+			"phone" => $phone	
 		);
 	}
 

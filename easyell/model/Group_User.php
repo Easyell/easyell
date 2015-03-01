@@ -10,12 +10,12 @@ class Group_User extends model{
 	public function __construct() {
 	}
 	
-	public function toArray {
+	public function toArray(){
 		return array(
-			"id" =>	$id;
-			"groupid" => $groupid;
-			"userid" => $userid;
-			"projectid" => $projectid;
+			"id" =>	$id,
+			"groupid" => $groupid,
+			"userid" => $userid,
+			"projectid" => $projectid
 		);
 	}
 

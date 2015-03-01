@@ -29,15 +29,15 @@ class Item extends Model {
 	//PublicMethod
 	public function toArray() {
 		return array(
-			'id' => $id;
-			'title' => $title;
-			'description' => $description;
-			'status' => $status;
-			'posterId' => $posterId;
-			'type' => $type;
-			'projectId' => $projectId;
-			'createDate' => $createDate;
-			'updateDate' => $updateDate;	
+			'id' => $id,
+			'title' => $title,
+			'description' => $description,
+			'status' => $status,
+			'posterId' => $posterId,
+			'type' => $type,
+			'projectId' => $projectId,
+			'createDate' => $createDate,
+			'updateDate' => $updateDate
 		);
 	}
 	//Delete

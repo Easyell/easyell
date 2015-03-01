@@ -15,13 +15,13 @@ class Project extends Model {
 	
 	public function toArray() {
 		return array(
-			"id" => $id;
-			"projectname" => $projectname;
-			"groupid" => $groupid;
-			"adminid" => $adminid;
-			"createrid" => $createrid;
-			"description" => $description;
-			"createdate" => $createdate;		
+			"id" => $id,
+			"projectname" => $projectname,
+			"groupid" => $groupid,
+			"adminid" => $adminid,
+			"createrid" => $createrid,
+			"description" => $description,
+			"createdate" => $createdate		
 		);
 	}
 
