@@ -10,6 +10,15 @@ class Group_User extends model{
 	public function __construct() {
 	}
 	
+	public function toArray(){
+		return array(
+			"id" =>	$id,
+			"groupid" => $groupid,
+			"userid" => $userid,
+			"projectid" => $projectid
+		);
+	}
+
 // PublicMethodi
 	public static function selectObjectWithId($id) {
 		global $SqlOp;

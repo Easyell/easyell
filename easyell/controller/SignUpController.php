@@ -14,9 +14,9 @@ class SignUpController extends Controller {
 		$user->username = $param['username'];
 		$user->password = $param['password'];
 		if($user->saveObject()) {
-			echo 'success';			
+			return 'success';			
 		} else {
-			echo 'fail';
+			return 'fail';
 		}
 	}
 }

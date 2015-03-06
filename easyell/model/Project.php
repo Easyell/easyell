@@ -13,6 +13,18 @@ class Project extends Model {
 	public function __construct() {
 	}
 	
+	public function toArray() {
+		return array(
+			"id" => $id,
+			"projectname" => $projectname,
+			"groupid" => $groupid,
+			"adminid" => $adminid,
+			"createrid" => $createrid,
+			"description" => $description,
+			"createdate" => $createdate		
+		);
+	}
+
 	public static function selectObjectWithId($id) {
 		global $SqlOp;
 		$array = $SqlOp->selectItem('Project', 'id', $id);

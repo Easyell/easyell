@@ -12,9 +12,9 @@ class UpdatePasswordController extends Controller {
 		$user = User::selectObjectWithAccount($param['account'])[0];
 		$user->password = $param['password'];
 		if($user->saveObject()) {
-			echo 'success';
+			return 'success';
 		} else {
-			echo 'fail';
+			return 'fail';
 		}
 	}
 

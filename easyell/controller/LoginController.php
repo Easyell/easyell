@@ -14,12 +14,12 @@ class LoginController extends Controller {
 		$user = User::selectObjectWithAccount($account)[0];
 		if ($user) {
 			if ($user->password == $password) {
-				var_dump($user);
+				return $user->toArray();
 			} else {
-				echo 'password error';
+				return 'password error';
 			}
 		} else {
-			echo 'account not exist';
+			return 'account not exist';
 		}
 	}
 }

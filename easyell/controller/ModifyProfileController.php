@@ -15,9 +15,9 @@ class ModifyProfileController extends controller {
 		$user->email  = $param['email'];
 		$user->phone = $param['phone'];		
 		if ($user->saveObject()) {
-			var_dump($user);
+			return $user->toArray();
 		} else {
-			echo 'fail';
+			return 'fail';
 		}
 	}
 }
