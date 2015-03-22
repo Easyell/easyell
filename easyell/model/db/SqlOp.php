@@ -6,7 +6,7 @@ class SqlOp extends Model{
 	private $password;
 	
 	private $db;
-	private $db_name = 'easyell_zcj';//'LightTracker';
+	private $db_name = 'LightTracker';//'easyell_zcj';
 
 	public $connect;
 	public $result;

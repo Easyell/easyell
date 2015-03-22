@@ -10,7 +10,6 @@ class Project extends Model {
 	public $createrid;
 	public $description;
 	public $createdate;
-	public $itemlist;
 	public function __construct() {
 	}
 	
@@ -29,12 +28,11 @@ class Project extends Model {
 	public static function selectObjectWithId($id) {
 		global $SqlOp;
 		$array = $SqlOp->selectItem('Project', 'id', $id);
-		// var_dump(self::createObjectWith($array['0']['id'], $array['0']['projectname'], $array['0']['adminid'], $array['0']['createrid'], $array['0']['description'], $array['0']['createdate'], $array['0']['groupid']));
-		// $objectArray = array();
-		// for ($i = 0;$i < count($array); $i ++) {
-		// 	array_push($objectArray, self::createObjectWith($array[$i]['id'], $array[$i]['projectname'], $array[$i]['adminid'], $array[$i]['createrid'], $array[$i]['description'], $array[$i]['createdate'], $array[$i]['groupid']));			
-		// }
-		return self::createObjectWith($array['0']['id'], $array['0']['projectname'], $array['0']['adminid'], $array['0']['createrid'], $array['0']['description'], $array['0']['createdate'], $array['0']['groupid']);
+		$objectArray = array();
+		for ($i = 0;$i < count($array); $i ++) {
+			array_push($objectArray, self::createObjectWith($array[$i]['id'], $array[$i]['projectname'], $array[$i]['adminid'], $array[$i]['createrid'], $array[$i]['description'], $array[$i]['createdate'], $array[$i]['groupid']));			
+		}
+		return $objectArray;
 	}
 
 	public static function all() {

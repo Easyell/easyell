@@ -32,7 +32,5 @@ class Tools extends Model {
 
 		return $name;
 	}
-
-	
 }
 ?>

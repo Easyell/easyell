@@ -29,16 +29,6 @@ class Group_User extends model{
 		}
 		return $objectArray;
 	}
-
-	public static function selectObjectWithUserId($userId) {
-		global $SqlOp;
-		$array = $SqlOp->selectItem('Group_User', 'userid',$userId);
-		$objectArray = array();
-		for ($i = 0; $i < count($array); $i ++) {
-			array_push($objectArray,  self::createObjectWith($array[$i]['id'], $array[$i]['groupid'], $array[$i]['userid'], $array[$i]['projectid']));
-		}
-		return $objectArray;
-	}
 	
 	public static function all() {
 		$array = self::selectAll($sqlOp);
