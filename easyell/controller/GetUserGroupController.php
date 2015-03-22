@@ -13,6 +13,7 @@ class GetUserGroupController extends Controller{
 		parent::__construct($isSql);
 	}
 
+//fn=3009&param={%22userId%22:%221%22}
 	public function set_param($param){
 		$this->load('User.php');
 		$this->load('Item.php');
@@ -113,7 +114,7 @@ class GetUserGroupController extends Controller{
 				// $projectObj->itemlist
 				$projectlist[$projectid] = $projectObj;
 			}
-			var_dump($projectlist);
+			// var_dump($projectlist);
 			$getProjectGroups[$projectGroup['id']]['projectlist'] = $projectlist;
 		}
 		$getProjectGroups = std_class_object_to_array($getProjectGroups);
