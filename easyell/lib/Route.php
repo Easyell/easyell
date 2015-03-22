@@ -22,7 +22,7 @@ class Route extends Model {
 			$this->fn = intval($this->fn);
 			//随身参数
 			$this->param = $_GET['param'];
-			
+			// echo $this->param;
 		}else if(isset($_POST['fn']) && isset($_POST['param'])){
 			$this->fn = $_POST['fn'];
 			$this->fn = intval($this->fn);

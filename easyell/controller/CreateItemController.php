@@ -4,7 +4,7 @@
 	@description Controller : create a item or update item
 	@author Leo Zhou
 	@createtime 2015/2/23
-	@updatetime 2014/2/24
+	@updatetime 2015/2/24
 **/
 
 class CreateItemController extends Controller{
