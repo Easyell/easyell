@@ -72,7 +72,8 @@ class Item extends Model {
 	public function selectObjectWithId($id){
 		global $SqlOp;
 		$array = $SqlOp->selectItem('Item','id',$id);
-		return self::changeToObjectArray($array);
+		return $array;
+		//return self::changeToObjectArray($array);
 	}
 
 	//primate Method 

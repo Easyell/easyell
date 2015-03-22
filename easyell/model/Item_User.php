@@ -13,7 +13,7 @@ class Item_User extends model{
 	//params
 	public $id;
 	public $itemId;
-	public $userId;
+	public $ownerId;
 
 	public function __construct() {
 	}
@@ -22,7 +22,7 @@ class Item_User extends model{
 		return array(
 			"id" => $id,
 			"itemId" => $itemId,
-			"userId" => $userId,
+			"ownerId" => $ownerId,
 		);
 	}
 
@@ -31,6 +31,13 @@ class Item_User extends model{
 		global $SqlOp;
 		$array = $SqlOp->selectItem('Item_User','id',$id);
 		return self::changeToObjectArray($array);
+	}
+
+	public static function selectObjectWithUserId($ownerId){
+		global $SqlOp;
+		$array = $SqlOp->selectItem('Item_User','ownerid',$ownerId);
+		// return self::changeToObjectArray($array);
+		return $array;
 	}
 
 	//selectAll
@@ -44,31 +51,31 @@ class Item_User extends model{
 	//Save 
 	public function saveObject(){
 		global $SqlOp;
-		$values = array($this->id,$this->itemId,$this->userId);
+		$values = array($this->id,$this->itemId,$this->ownerId);
 		$result = $SqlOp->insertTo('Item_User',$values);
 		if($result){
 			return $result;
 		} else {
-			$keys = array('itemId','userId');
-			$values = array($this->itemId,$this->userId);
+			$keys = array('itemId','ownerId');
+			$values = array($this->itemId,$this->ownerId);
 			$result = $SqlOp->updateItem('Item_User',$keys,$values,'id',$this->id);
 			return $result;
 		}
 	}
 
 	//private 
-	private static function createObjectWith($id,$itemId,$userId){
+	private static function createObjectWith($id,$itemId,$ownerId){
 		$object = new Item_User();
 		$object->id = $id;
 		$object->itemId = $itemId;
-		$object->userId = $userId;
+		$object->ownerId = $ownerId;
 		return $object;
 	}
 
 	private static function changeToObjectArray($array) {
 		$objectArray = array();
 		for ($i = 0; $i < count($array); $i ++) {
-			array_push($objectArray,  self::createObjectWith($array[$i]['id'], $array[$i]['groupname'], $array[$i]['updatetime'], $array[$i]['adminid'], $array[$i]['createrid'], $array[$i]['description']));
+			array_push($objectArray,  self::createObjectWith($array[$i]['id'], $array[$i]['itemId'], $array[$i]['ownerId']));
 		}
 		return $objectArray;
 	}

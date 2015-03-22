@@ -50,7 +50,8 @@ class Group extends model {
 	public static function selectObjectWithId($id) {
 		global $SqlOp;
 		$array = $SqlOp->selectItem("`Group`", 'id', $id);
-		return self::changeToObjectArray($array);
+		// return self::changeToObjectArray($array);
+		return $array['0'];
 	}
 
 	private static function changeToObjectArray($array) {

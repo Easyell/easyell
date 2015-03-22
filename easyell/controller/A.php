@@ -9,13 +9,14 @@ class A extends Controller{
 	}
 
 	public function set_param(){
+		global $SqlOp;
 ///////Test for SqlOp.php///////////////////////////////
 	//--load;
-	 //	$this->load('tools/SqlOp.php');
+	 	// $this->load('tools/SqlOp.php');
 	//--all
-	//	$this->SqlOp->connectTo();
-	 //	echo json_encode($this->SqlOp->selectAll('Group_User'));
-	//	$this->SqlOp->close();
+		// $SqlOp->connectTo();
+	 	var_dump($SqlOp->selectAll('Item_User'));
+		// $this->SqlOp->close();
 	//--connectTo();
 		//if($this->SqlOp->connectTo()) {
 			//echo "success";
@@ -85,8 +86,9 @@ class A extends Controller{
 		var_dump($array[0]);
 		**/
 	/////////////////////////////
-   		global $SqlOp;
+   		
 		$SqlOp->close();
+		// echo "success to website.";
 	}
 
 	private function testBoolValue($bool) {
