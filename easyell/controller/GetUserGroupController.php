@@ -53,11 +53,11 @@ class GetUserGroupController extends Controller{
 		$getItemProjectsMap = array();
 		foreach ($getUserItems as $itemObj) {
 
-			if(!in_array($itemObj['0']['projectid'],$getItemProjectIds)){
-				array_push($getItemProjectIds,$itemObj['0']['projectid']);
-				$getItemProjectsMap[$itemObj['0']['projectid']]['0']=$itemObj['0']['id'];
+			if(!in_array($itemObj[0]['projectId'],$getItemProjectIds)){
+				array_push($getItemProjectIds,$itemObj[0]['projectId']);
+				$getItemProjectsMap[$itemObj[0]['projectId']][0]=$itemObj[0]['id'];
 			}else{
-				array_push($getItemProjectsMap[$itemObj['0']['projectid']],$itemObj['0']['id']);
+				array_push($getItemProjectsMap[$itemObj[0]['projectId']],$itemObj[0]['id']);
 			}
 		}
 
@@ -79,7 +79,7 @@ class GetUserGroupController extends Controller{
 		foreach ($getItemProjects as $itemProjectObj) {
 			if(!in_array($itemProjectObj->groupid, $getProjectGroupIds)){
 				array_push($getProjectGroupIds, $itemProjectObj->groupid);
-				$getProjectGroupMap[$itemProjectObj->groupid]['0'] = $itemProjectObj->id;
+				$getProjectGroupMap[$itemProjectObj->groupid][0] = $itemProjectObj->id;
 			}else{
 				array_push($getProjectGroupMap[$itemProjectObj->groupid], $itemProjectObj->id);
 			}
@@ -123,7 +123,7 @@ class GetUserGroupController extends Controller{
 
 
 		// for ($j=0; $j < sizeof($getProjectGroups); $j++) { 
-		// 	$getProjectGroups[$j]['0']['projectlist'] = $getItemProjects;
+		// 	$getProjectGroups[$j][0]['projectlist'] = $getItemProjects;
 		// }
 
 		// var_dump($getProjectGroups);
