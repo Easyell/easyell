@@ -42,9 +42,9 @@ class Route extends Model {
 		$param = $this->param;		
 
 		if(is_string($param)){
-			$paramObj = json_decode($param ,TRUE);
-			if(is_object($paramObj)){
-				$param = get_object_vars($paramObj);
+			$param = json_decode($param ,TRUE);
+			if(is_object($param)){
+				$param = get_object_vars($param);
 			}
 		}
 		$this->param = $param;
