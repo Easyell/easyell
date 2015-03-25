@@ -119,7 +119,7 @@ class GetUserGroupController extends Controller{
 		}
 		$getProjectGroups = std_class_object_to_array($getProjectGroups);
 		// var_dump($getProjectGroups);
-		echo json_encode($getProjectGroups);
+		return json_encode($getProjectGroups);
 
 
 		// for ($j=0; $j < sizeof($getProjectGroups); $j++) { 
