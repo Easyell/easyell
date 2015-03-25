@@ -6,7 +6,7 @@ class SqlOp extends Model{
 	private $password;
 	
 	private $db;
-	private $db_name = 'easyell_zcj';//'LightTracker';
+	private $db_name = 'LightTracker';//'LightTracker';
 
 	public $connect;
 	public $result;
@@ -50,7 +50,6 @@ class SqlOp extends Model{
 		
 	}
 	private function queryTo($_str){
-		var_dump($_str);
 		// $this->result = mysql_query($_str,$this->connect);
 		$this->result = mysqli_query($this->connect,$_str);
 		if($this->result!=FALSE){
